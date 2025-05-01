@@ -14,7 +14,9 @@
   <div class="container mx-auto px-4 py-7 flex justify-between items-center">
     <!-- Thông báo -->
     <div class="text-red-800 text-xl">
-      Miễn phí vận chuyển cho mọi đơn hàng từ 999.000 VNĐ - Hotline 1900 2555 79
+    <?= "Miễn phí vận chuyển cho mọi đơn hàng từ 999.000 VNĐ - Hotline " . ($GLOBALS['site_info']['hotline'] ?? 'Chưa có hotline'); ?>
+
+
     </div>
 
     <!-- Ngôn ngữ + Đăng nhập -->
