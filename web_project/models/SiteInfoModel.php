@@ -13,4 +13,12 @@ class SiteInfoModel {
 
         return $data;
     }
+    public static function update($key, $value) {
+        require __DIR__ . '/../config/config.php';
+        $stmt = mysqli_prepare($conn, "INSERT INTO site_info (`key`, `value`)
+            VALUES (?, ?) ON DUPLICATE KEY UPDATE `value` = VALUES(`value`)");
+        mysqli_stmt_bind_param($stmt, "ss", $key, $value);
+        mysqli_stmt_execute($stmt);
+    }
+    
 }
