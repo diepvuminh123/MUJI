@@ -18,12 +18,23 @@ function updateSiteValue($conn, $key, $value) {
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_GET['action'] ?? '') === 'updateSiteInfo') {
     updateSiteValue($conn, 'hotline', $_POST['hotline']);
     updateSiteValue($conn, 'address', $_POST['address']);
-    echo "<div class='alert alert-success text-center'>Cập nhật thành công!</div>";
+
+    if (!empty($_FILES['logo']['name'])) {
+        $targetDir = __DIR__ . '/../../assets/uploads/';
+        $targetFile = $targetDir . basename($_FILES['logo']['name']);
+        if (move_uploaded_file($_FILES['logo']['tmp_name'], $targetFile)) {
+            $relativePath = 'assets/uploads/' . basename($_FILES['logo']['name']);
+            updateSiteValue($conn, 'logo', $relativePath);
+        }
+    }
+
+    echo "<div class='alert alert-success text-center' id='success-alert'>Cập nhật thành công!</div>";
 }
 
 $GLOBALS['site_info'] = [
     'hotline' => getSiteValue($conn, 'hotline'),
-    'address' => getSiteValue($conn, 'address')
+    'address' => getSiteValue($conn, 'address'),
+    'logo' => getSiteValue($conn, 'logo')
 ];
 ?>
 <!DOCTYPE html>
@@ -35,6 +46,11 @@ $GLOBALS['site_info'] = [
   <link rel="stylesheet" href="./assets/compiled/css/app.css">
   <link rel="stylesheet" href="./assets/compiled/css/app-dark.css">
   <link rel="stylesheet" href="./assets/compiled/css/iconly.css">
+  <style>
+    #success-alert {
+      transition: opacity 1s ease;
+    }
+  </style>
 </head>
 <body>
 <script src="assets/static/js/initTheme.js"></script>
@@ -80,10 +96,22 @@ $GLOBALS['site_info'] = [
           <div class="col-12 col-lg-8">
             <div class="card mt-4">
               <div class="card-header">
+                <h4>Thông tin hiện tại</h4>
+              </div>
+              <div class="card-body text-center">
+                <?php if (!empty($GLOBALS['site_info']['logo'])): ?>
+                  <img src="<?= $GLOBALS['site_info']['logo'] ?>" alt="Logo" style="max-height: 100px;">
+                <?php endif; ?>
+                <p class="mt-2"><strong>Hotline:</strong> <?= htmlspecialchars($GLOBALS['site_info']['hotline']) ?></p>
+                <p><strong>Địa chỉ:</strong> <?= htmlspecialchars($GLOBALS['site_info']['address']) ?></p>
+              </div>
+            </div>
+            <div class="card mt-4">
+              <div class="card-header">
                 <h4>Chỉnh sửa thông tin công ty</h4>
               </div>
               <div class="card-body">
-                <form method="post" action="?action=updateSiteInfo">
+                <form method="post" action="?action=updateSiteInfo" enctype="multipart/form-data">
                   <div class="mb-3">
                     <label class="form-label">Hotline:</label>
                     <input type="text" name="hotline" class="form-control" value="<?= htmlspecialchars($GLOBALS['site_info']['hotline']) ?>" required>
@@ -92,64 +120,14 @@ $GLOBALS['site_info'] = [
                     <label class="form-label">Địa chỉ:</label>
                     <input type="text" name="address" class="form-control" value="<?= htmlspecialchars($GLOBALS['site_info']['address']) ?>" required>
                   </div>
+                  <div class="mb-3">
+                    <label class="form-label">Logo công ty:</label>
+                    <input type="file" name="logo" class="form-control">
+                  </div>
                   <button type="submit" class="btn btn-primary">Cập nhật</button>
                 </form>
               </div>
             </div>
-          </div>
-        <?php else: ?>
-            
-<div class="col-12 col-lg-9">
-  <div class="row">
-    <div class="col-6 col-lg-3 col-md-6">
-      <div class="card">
-        <div class="card-body px-4 py-4-5">
-          <div class="stats-icon purple mb-2">
-            <i class="iconly-boldShow"></i>
-          </div>
-          <h6 class="text-muted font-semibold">Profile Views</h6>
-          <h6 class="font-extrabold mb-0">112.000</h6>
-        </div>
-      </div>
-    </div>
-    <div class="col-6 col-lg-3 col-md-6">
-      <div class="card">
-        <div class="card-body px-4 py-4-5">
-          <div class="stats-icon blue mb-2">
-            <i class="iconly-boldProfile"></i>
-          </div>
-          <h6 class="text-muted font-semibold">Followers</h6>
-          <h6 class="font-extrabold mb-0">183.000</h6>
-        </div>
-      </div>
-    </div>
-    <div class="col-6 col-lg-3 col-md-6">
-      <div class="card">
-        <div class="card-body px-4 py-4-5">
-          <div class="stats-icon green mb-2">
-            <i class="iconly-boldAdd-User"></i>
-          </div>
-          <h6 class="text-muted font-semibold">Following</h6>
-          <h6 class="font-extrabold mb-0">80.000</h6>
-        </div>
-      </div>
-    </div>
-    <div class="col-6 col-lg-3 col-md-6">
-      <div class="card">
-        <div class="card-body px-4 py-4-5">
-          <div class="stats-icon red mb-2">
-            <i class="iconly-boldBookmark"></i>
-          </div>
-          <h6 class="text-muted font-semibold">Saved Post</h6>
-          <h6 class="font-extrabold mb-0">112</h6>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-    </div>
-  </div>
-</div>
           </div>
         <?php endif; ?>
       </section>
@@ -167,6 +145,12 @@ $GLOBALS['site_info'] = [
     </footer>
   </div>
 </div>
+<script>
+  setTimeout(() => {
+    const alert = document.getElementById('success-alert');
+    if (alert) alert.style.opacity = '0';
+  }, 5000);
+</script>
 <script src="assets/static/js/components/dark.js"></script>
 <script src="assets/extensions/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 <script src="assets/compiled/js/app.js"></script>

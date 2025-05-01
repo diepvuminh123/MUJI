@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MUJI Web</title>
+  <title>Home</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />   <!-- Tailwind CSS CDN -->
   <script src="../../assets/js/Header.js"></script>
 </head>
@@ -14,7 +14,9 @@
   <div class="container mx-auto px-4 py-7 flex justify-between items-center">
     <!-- Thông báo -->
     <div class="text-red-800 text-xl">
-    <?= "Miễn phí vận chuyển cho mọi đơn hàng từ 999.000 VNĐ - Hotline " . ($GLOBALS['site_info']['hotline'] ?? 'Chưa có hotline'); ?>
+    <?=
+    "Địa chỉ:".($GLOBALS['site_info']['address'] ?? 'Chưa có địa chỉ') . " | " ."".
+    "Hotline: " . ($GLOBALS['site_info']['hotline'] ?? 'Chưa có hotline'); ?>
 
 
     </div>
@@ -53,7 +55,11 @@
     
     <!-- Logo MUJI -->
     <div class="flex-shrink-0 pr-4">
-      <h1 class="text-3xl font-bold leading-tight">MUJI<br><span class="text-xs text-xl">無印良品</span></h1>
+      <h1 class="text-3xl font-bold leading-tight">
+      <?="".($GLOBALS['site_info']['Company_name'] ?? 'Chưa có tên') ?>
+        
+        <br><span class="text-xs text-xl"><?="".($GLOBALS['site_info']['Slogan '] ?? 'Chưa có slogan ') ?></span>
+      </h1>
     </div>
 
     <!--  Menu chính -->
