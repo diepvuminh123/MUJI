@@ -8,10 +8,10 @@
   <script src="../../assets/js/Header.js"></script>
 </head>
 
-<footer class="bg-white dark:bg-gray-1000 ">
+<footer class="dark:bg-gray-1000 " style="background-color: rgb(245 245 245/var(--tw-bg-opacity,1));">
     <div class="mx-auto w-full max-w-full">
-      <div class="grid grid-cols-2 gap-8 px-4 py-6 lg:py-8 md:grid-cols-4 ">
-        <div>
+      <div class="grid grid-cols-2 gap-12 px-10 py-6 lg:py-8 md:grid-cols-4  justify-items-center ">
+        <div class="text-center" >
             <h2 class="mb-6 text-3xl font-semibold text-gray-900 uppercase dark:text-white">Company</h2>
             <ul class="text-gray-500 dark:text-gray-400 font-medium text-2xl">
                 <li class="mb-4">
