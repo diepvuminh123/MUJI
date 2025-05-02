@@ -19,6 +19,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_GET['action'] ?? '') === 'update
     updateSiteValue($conn, 'hotline', $_POST['hotline']);
     updateSiteValue($conn, 'address', $_POST['address']);
     updateSiteValue($conn, 'Company_name', $_POST['Company_name']);
+    updateSiteValue($conn, 'Slogan ', $_POST['Slogan']);
+
 
 
 
@@ -30,7 +32,9 @@ $GLOBALS['site_info'] = [
     'hotline' => getSiteValue($conn, 'hotline'),
     'address' => getSiteValue($conn, 'address'),
     'logo' => getSiteValue($conn, 'logo'),
-    'Company_name' => getSiteValue($conn, 'Company_name')
+    'Company_name' => getSiteValue($conn, 'Company_name'),
+    'Slogan' => getSiteValue($conn, 'Slogan')
+
 ];
 ?>
 <!DOCTYPE html>
@@ -95,11 +99,10 @@ $GLOBALS['site_info'] = [
                 <h4>Thông tin hiện tại</h4>
               </div>
               <div class="card-body text-center">
-                <?php if (!empty($GLOBALS['site_info']['logo'])): ?>
-                  <img src="<?= $GLOBALS['site_info']['logo'] ?>" alt="Logo" style="max-height: 100px;">
-                <?php endif; ?>
+                <p class="mt-2"><strong>Tên công ty (Logo):</strong> <?= htmlspecialchars($GLOBALS['site_info']['Company_name']) ?></p>
                 <p class="mt-2"><strong>Hotline:</strong> <?= htmlspecialchars($GLOBALS['site_info']['hotline']) ?></p>
                 <p><strong>Địa chỉ:</strong> <?= htmlspecialchars($GLOBALS['site_info']['address']) ?></p>
+                <p><strong>Slogan:</strong> <?= htmlspecialchars($GLOBALS['site_info']['Slogan']) ?></p>
               </div>
             </div>
             <div class="card mt-4">
@@ -117,8 +120,12 @@ $GLOBALS['site_info'] = [
                     <input type="text" name="address" class="form-control" value="<?= htmlspecialchars($GLOBALS['site_info']['address']) ?>" required>
                   </div>
                   <div class="mb-3">
-                    <label class="form-label">Logo công ty:</label>
-                    <input type="file" name="logo" class="form-control">
+                    <label class="form-label">Tên công ty (Logo):</label>
+                    <input type="text" name="Company_name" class="form-control" value="<?= htmlspecialchars($GLOBALS['site_info']['Company_name']) ?>" required>
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">Slogan:</label>
+                    <input type="text" name="Slogan" class="form-control" value="<?= htmlspecialchars($GLOBALS['site_info']['Slogan']) ?>" required>
                   </div>
                   <button type="submit" class="btn btn-primary">Cập nhật</button>
                 </form>
