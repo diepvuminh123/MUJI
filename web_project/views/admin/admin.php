@@ -18,15 +18,10 @@ function updateSiteValue($conn, $key, $value) {
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_GET['action'] ?? '') === 'updateSiteInfo') {
     updateSiteValue($conn, 'hotline', $_POST['hotline']);
     updateSiteValue($conn, 'address', $_POST['address']);
+    updateSiteValue($conn, 'Company_name', $_POST['Company_name']);
 
-    if (!empty($_FILES['logo']['name'])) {
-        $targetDir = __DIR__ . '/../../assets/uploads/';
-        $targetFile = $targetDir . basename($_FILES['logo']['name']);
-        if (move_uploaded_file($_FILES['logo']['tmp_name'], $targetFile)) {
-            $relativePath = 'assets/uploads/' . basename($_FILES['logo']['name']);
-            updateSiteValue($conn, 'logo', $relativePath);
-        }
-    }
+
+
 
     echo "<div class='alert alert-success text-center' id='success-alert'>Cập nhật thành công!</div>";
 }
@@ -34,7 +29,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_GET['action'] ?? '') === 'update
 $GLOBALS['site_info'] = [
     'hotline' => getSiteValue($conn, 'hotline'),
     'address' => getSiteValue($conn, 'address'),
-    'logo' => getSiteValue($conn, 'logo')
+    'logo' => getSiteValue($conn, 'logo'),
+    'Company_name' => getSiteValue($conn, 'Company_name')
 ];
 ?>
 <!DOCTYPE html>
