@@ -50,7 +50,7 @@
 </div>
 
 <!-- Thanh navbar chính -->
-<div class="bg-red-800 text-white ">
+<div class="bg-red-800 text-white sticky top-0 z-50 ">
   <div class=" w-3/4 mx-auto py-4 flex items-center justify-between">
     
     <!-- Logo App -->
