@@ -64,12 +64,13 @@
 
     <!--  Menu chính -->
     <ul class="hidden md:flex space-x-5 font-semibold">
-      <li><a href="#" class="hover:underline text-2xl ">Hàng Mới</a></li>
-      <li><a href="#" class="hover:underline text-2xl">Bán Chạy</a></li>
-      <li><a href="#" class="hover:underline text-2xl">Quần áo ▾</a></li>
-      <li><a href="#" class="hover:underline text-2xl">Sức Khoẻ & Làm Đẹp ▾</a></li>
-      <li><a href="#" class="hover:underline text-2xl">Gia Dụng ▾</a></li>
-      <li><a href="#" class="hover:underline text-2xl">Thực Phẩm ▾</a></li>
+      <li><a href="#" class="hover:underline text-2xl">Danh sách sản phẩm </a></li>
+      <li><a href="#" class="hover:underline text-2xl">Liên Hệ</a></li>
+      <li><a href="#" class="hover:underline text-2xl">Giới Thiệu</a></li>
+      <li><a href="#" class="hover:underline text-2xl">Hỏi Đáp</a></li>
+      <li><a href="#" class="hover:underline text-2xl ">Danh sách bài viết</a></li>
+
+     
     </ul>
 
     <!-- Tìm kiếm & Giỏ hàng -->
