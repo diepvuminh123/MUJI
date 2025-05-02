@@ -50,11 +50,11 @@
 </div>
 
 <!-- Thanh navbar chính -->
-<div class="bg-red-800 text-white ">
-  <div class="container mx-auto px-4 py-4 flex items-center justify-between w-xl">
+<div class="bg-red-800 text-white sticky top-0 z-50 ">
+  <div class=" w-3/4 mx-auto py-4 flex items-center justify-between">
     
-    <!-- Logo MUJI -->
-    <div class="flex-shrink-0 pr-4">
+    <!-- Logo App -->
+    <div class="flex-shrink-0 pl-3 ">
       <h1 class="text-3xl font-bold leading-tight">
       <?="".($GLOBALS['site_info']['Company_name'] ?? 'Chưa có tên') ?>
         
@@ -64,25 +64,60 @@
 
     <!--  Menu chính -->
     <ul class="hidden md:flex space-x-5 font-semibold">
-      <li><a href="#" class="hover:underline text-2xl ">Hàng Mới</a></li>
-      <li><a href="#" class="hover:underline text-2xl">Bán Chạy</a></li>
-      <li><a href="#" class="hover:underline text-2xl">Quần áo ▾</a></li>
-      <li><a href="#" class="hover:underline text-2xl">Sức Khoẻ & Làm Đẹp ▾</a></li>
-      <li><a href="#" class="hover:underline text-2xl">Gia Dụng ▾</a></li>
-      <li><a href="#" class="hover:underline text-2xl">Thực Phẩm ▾</a></li>
+      <li><a href="#" class="hover:underline text-2xl">Danh sách sản phẩm </a></li>
+      <li><a href="#" class="hover:underline text-2xl">Liên Hệ</a></li>
+      <li><a href="#" class="hover:underline text-2xl">Giới Thiệu</a></li>
+      <li><a href="#" class="hover:underline text-2xl">Hỏi Đáp</a></li>
+      <li><a href="#" class="hover:underline text-2xl ">Danh sách bài viết</a></li>
+
+     
     </ul>
 
     <!-- Tìm kiếm & Giỏ hàng -->
-    <div class="flex items-center space-x-4 w-1/3">
+    <div class="flex items-center space-x-4 ">
       
-      <div class="relative flex-grow">
-        <input type="text" placeholder="Bạn đang muốn tìm kiếm gì?" class="w-full rounded-full pl-10 pr-10 py-2 text-sm text-gray-700 focus:outline-none" />
-        <span class="absolute left-3 top-2.5 text-gray-400">🔍</span>
-        <span class="absolute right-3 top-2.5 text-gray-400 cursor-pointer">❌</span>
+      <!-- search -->
        
-      </div>
+      <form class="mx-auto" style="width: 480px;">
+      <input type="hidden" name="search" value="true">
+      <label for="default-search" class="mb-2 pl-6 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
 
-      <a href="#" class="text-white text-xl">🛒</a>
+      <div class="relative">
+        <!-- Icon search -->
+        <div class="absolute inset-y-0 left-3 flex items-center pointer-events-none">
+          <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+          </svg>
+        </div>
+
+        <!-- Input with padding left & right -->
+        <input
+          type="search"
+          id="default-search"
+          class="block w-full p-4 pr-24 pl-10 text-lg text-gray-900 border border-gray-300 rounded-lg bg-gray-50
+                focus:ring-blue-500 focus:border-blue-500
+                dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white
+                dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                
+          placeholder="Tìm kiếm sản phẩm "
+          required
+        />
+
+        <!-- Button search -->
+        <button
+          type="submit"
+          class="absolute right-2.5 bottom-2.5 bg-gray-700 hover:bg-blue-800 text-white font-medium rounded-lg text-lg px-4 py-2
+                focus:outline-none focus:ring-4 focus:ring-blue-300
+                dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+          Search
+        </button>
+      </div>
+    </form>
     </div>
+    <!-- Giỏ hàng -->
+    <div class="ml-1">
+        <img src="../../assets/images/shopping-cart.png" class="h-12 w-12" alt="Giỏ hàng" />
+        </div>
   </div>
 </div>

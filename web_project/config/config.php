@@ -1,5 +1,5 @@
 <?php
-$conn = mysqli_connect("localhost", "root", "", "muji_web", 3308);
+$conn = mysqli_connect("localhost", "root", "", "muji_web", 3307);
 if (!$conn) {
     die("Kết nối MySQL thất bại: " . mysqli_connect_error());
 }
