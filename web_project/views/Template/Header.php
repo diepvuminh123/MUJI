@@ -3,8 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Home</title>
+  <!-- <title>Home</title> -->
+  <title><?php echo $page_title ?? 'Home'; ?></title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />   <!-- Tailwind CSS CDN -->
+  <link href="../../assets/css/products.css" rel="stylesheet" />
   <script src="../../assets/js/Header.js"></script>
 </head>
 <body class="bg-white font-sans text-sm text-gray-800">
@@ -64,7 +66,7 @@
 
     <!--  Menu chính -->
     <ul class="hidden md:flex space-x-5 font-semibold">
-      <li><a href="#" class="hover:underline text-2xl">Danh sách sản phẩm </a></li>
+      <li><a href="index.php?action=products" class="hover:underline text-2xl">Danh sách sản phẩm </a></li>
       <li><a href="#" class="hover:underline text-2xl">Liên Hệ</a></li>
       <li><a href="#" class="hover:underline text-2xl">Giới Thiệu</a></li>
       <li><a href="#" class="hover:underline text-2xl">Hỏi Đáp</a></li>
@@ -78,8 +80,11 @@
       
       <!-- search -->
        
-      <form class="mx-auto" style="width: 550px;">
-      <input type="hidden" name="search" value="true">
+
+
+      <form class="mx-auto" style="width: 480px;" action="index.php" method="GET">
+      <input type="hidden" name="action" value="products">
+        
       <label for="default-search" class="mb-2 pl-6 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
 
       <div class="relative">
@@ -95,6 +100,7 @@
         <input
           type="search"
           id="default-search"
+          name="search"
           class="block w-full p-4 pr-24 pl-10 text-lg text-gray-900 border border-gray-300 rounded-lg bg-gray-50
                 focus:ring-blue-500 focus:border-blue-500
                 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white
