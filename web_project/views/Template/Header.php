@@ -124,15 +124,38 @@
       </div>
     </form>
     </div>
+    <!-- Đoạn code giỏ hàng trong Header.php -->
+    <!-- Thay thế phần giỏ hàng hiện tại bằng code sau -->
+    <div class="position-relative">
+        <a href="index.php?action=cart" class="text-white d-flex align-items-center text-decoration-none">
+            <i class="fas fa-shopping-cart fs-5 me-2"></i>
+            <span class="d-none d-lg-inline">Giỏ hàng</span>
+            <?php
+            // Lấy số lượng sản phẩm trong giỏ hàng
+            $cartCount = 0;
+            if (isset($db)) {
+                require_once __DIR__ . '/../models/Cart.php';
+                $cartModel = new Cart($db);
+                $userId = isset($_SESSION['user']) ? $_SESSION['user']['id'] : null;
+                $sessionId = session_id();
+                $cartCount = $cartModel->countCartItems($userId, $sessionId);
+            }
+            ?>
+            <?php if ($cartCount > 0): ?>
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="cart-count">
+                    <?php echo $cartCount; ?>
+                </span>
+            <?php endif; ?>
+        </a>
+    </div>
     <!-- Giỏ hàng -->
-<<<<<<< HEAD
     <!-- <div class="ml-1">
         <a href="index.php?action=cart" class="flex items-center text-red-800 font-semibold hover:underline">
             <img src="/MUJI/web_project/assets/images/shopping-cart.png" class="h-12 w-12" alt="Giỏ hàng"/>
          </a>
       </div> -->
       <!-- Cart -->
-      <div class="position-relative">
+      <!-- <div class="position-relative">
           <a href="index.php?action=cart" class="text-dark d-flex align-items-center text-decoration-none">
               <i class="fas fa-shopping-cart fs-5 me-2"></i>
               <span class="d-none d-lg-inline">Giỏ hàng</span>
@@ -150,13 +173,7 @@
                   </span>
               <?php endif; ?>
           </a>
-      </div>
-=======
-    <div class="ml-5">
-    <img src="/MUJI/web_project/assets/images/shopping-cart.png" class="h-12 w-12">
-
-    </div>
->>>>>>> 34ac8bfc9d07fbc97c45f581d7fce984831b94d9
+      </div> -->
   </div>
 </div>
 

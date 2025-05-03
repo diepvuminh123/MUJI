@@ -51,7 +51,105 @@ include  __DIR__ . '/../Template/Header.php';
                             <span class="text-danger"><i class="fas fa-times-circle"></i> Hết hàng</span>
                         <?php endif; ?>
                     </div>
-                    
+                    <!-- Thêm vào giỏ hàng sau phần hiển thị "Còn hàng" / "Hết hàng" -->
+                    <div class="mb-4">
+                        <?php if (isset($data['product']['quantity']) && $data['product']['quantity'] > 0): ?>
+                            <form action="index.php?action=addToCart" method="post" class="add-to-cart-form">
+                                <div class="row g-3 align-items-center">
+                                    <div class="col-auto">
+                                        <label for="quantity" class="form-label">Số lượng:</label>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="input-group" style="width: 130px;">
+                                            <button type="button" class="btn btn-outline-secondary decrease-qty">
+                                                <i class="fas fa-minus"></i>
+                                            </button>
+                                            <input type="number" class="form-control text-center" id="quantity" name="quantity" 
+                                                value="1" min="1" max="<?php echo min($data['product']['quantity'], 10); ?>">
+                                            <button type="button" class="btn btn-outline-secondary increase-qty">
+                                                <i class="fas fa-plus"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <input type="hidden" name="product_id" value="<?php echo $data['product']['id']; ?>">
+                                        <button type="submit" class="btn btn-danger">
+                                            <i class="fas fa-shopping-cart me-2"></i> Thêm vào giỏ hàng
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                            
+                            <script>
+                                document.addEventListener('DOMContentLoaded', function() {
+                                    const decreaseBtn = document.querySelector('.decrease-qty');
+                                    const increaseBtn = document.querySelector('.increase-qty');
+                                    const quantityInput = document.getElementById('quantity');
+                                    const maxQuantity = parseInt(quantityInput.getAttribute('max'));
+                                    
+                                    // Giảm số lượng
+                                    decreaseBtn.addEventListener('click', function() {
+                                        let value = parseInt(quantityInput.value);
+                                        if (value > 1) {
+                                            quantityInput.value = value - 1;
+                                        }
+                                    });
+                                    
+                                    // Tăng số lượng
+                                    increaseBtn.addEventListener('click', function() {
+                                        let value = parseInt(quantityInput.value);
+                                        if (value < maxQuantity) {
+                                            quantityInput.value = value + 1;
+                                        }
+                                    });
+                                    
+                                    // AJAX thêm vào giỏ hàng
+                                    const form = document.querySelector('.add-to-cart-form');
+                                    form.addEventListener('submit', function(e) {
+                                        e.preventDefault();
+                                        
+                                        const productId = this.querySelector('input[name="product_id"]').value;
+                                        const quantity = this.querySelector('input[name="quantity"]').value;
+                                        
+                                        fetch('index.php?action=addToCart', {
+                                            method: 'POST',
+                                            headers: {
+                                                'Content-Type': 'application/json',
+                                                'X-Requested-With': 'XMLHttpRequest'
+                                            },
+                                            body: JSON.stringify({
+                                                product_id: productId,
+                                                quantity: quantity
+                                            })
+                                        })
+                                        .then(response => response.json())
+                                        .then(data => {
+                                            if (data.success) {
+                                                alert('Đã thêm sản phẩm vào giỏ hàng!');
+                                                
+                                                // Cập nhật số lượng sản phẩm trong giỏ hàng hiển thị trên header
+                                                const cartCountElement = document.getElementById('cart-count');
+                                                if (cartCountElement) {
+                                                    cartCountElement.textContent = data.cart_count;
+                                                    cartCountElement.style.display = 'inline-block';
+                                                }
+                                            } else {
+                                                alert(data.message || 'Có lỗi xảy ra khi thêm sản phẩm vào giỏ hàng!');
+                                            }
+                                        })
+                                        .catch(error => {
+                                            console.error('Lỗi:', error);
+                                            alert('Đã xảy ra lỗi khi thêm sản phẩm vào giỏ hàng!');
+                                        });
+                                    });
+                                });
+                            </script>
+                        <?php else: ?>
+                            <button class="btn btn-secondary" disabled>
+                                <i class="fas fa-shopping-cart me-2"></i> Hết hàng
+                            </button>
+                        <?php endif; ?>
+                    </div>
                     <!-- Description -->
                     <div class="mb-4">
                         <h5>Mô tả sản phẩm:</h5>

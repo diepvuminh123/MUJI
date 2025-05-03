@@ -43,6 +43,36 @@ switch ($action) {
         }
         break;
     
+    case 'cart':
+        require_once __DIR__ . '/../controllers/CartController.php';
+        $cartController = new CartController($db);
+        $cartController->index();
+        break;
+        
+    case 'addToCart':
+        require_once __DIR__ . '/../controllers/CartController.php';
+        $cartController = new CartController($db);
+        $cartController->addToCart();
+        break;
+        
+    case 'updateCartItem':
+        require_once __DIR__ . '/../controllers/CartController.php';
+        $cartController = new CartController($db);
+        $cartController->updateCartItem();
+        break;
+        
+    case 'removeCartItem':
+        require_once __DIR__ . '/../controllers/CartController.php';
+        $cartController = new CartController($db);
+        $cartController->removeCartItem();
+        break;
+        
+    case 'clearCart':
+        require_once __DIR__ . '/../controllers/CartController.php';
+        $cartController = new CartController($db);
+        $cartController->clearCart();
+        break;
+    
 
     default:
         echo "404 - Không tìm thấy hành động.";
