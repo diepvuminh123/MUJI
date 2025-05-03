@@ -44,12 +44,36 @@
     </div>
   </div>  
 
+      <!-- Phần đăng nhập/đăng ký trong Header.php -->
       <div class="flex items-center space-x-2 text-xl">
+          <span class="text-red-800">👤</span>
+          <?php if (isset($_SESSION['user'])): ?>
+              <div class="dropdown">
+                  <a href="#" class="text-red-800 font-semibold hover:underline dropdown-toggle" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                      <?php echo htmlspecialchars($_SESSION['user']['full_name']); ?>
+                  </a>
+                  <ul class="dropdown-menu" aria-labelledby="userDropdown">
+                      <?php if ($_SESSION['user']['role'] === 'admin'): ?>
+                          <li><a class="dropdown-item" href="index.php?action=admin_dashboard">Quản trị</a></li>
+                      <?php endif; ?>
+                      <!-- <li><a class="dropdown-item" href="index.php?action=profile">Tài khoản của tôi</a></li> -->
+                      <!-- <li><a class="dropdown-item" href="index.php?action=my_orders">Đơn hàng của tôi</a></li> -->
+                      <li><hr class="dropdown-divider"></li>
+                      <li><a class="dropdown-item" href="index.php?action=logout">Đăng xuất</a></li>
+                  </ul>
+              </div>
+          <?php else: ?>
+              <a href="index.php?action=login" class="text-red-800 font-semibold hover:underline">Đăng nhập</a>
+              <span class="text-red-800">|</span>
+              <a href="index.php?action=register" class="text-red-800 font-semibold hover:underline">Đăng ký</a>
+          <?php endif; ?>
+      </div>
+      <!-- <div class="flex items-center space-x-2 text-xl">
         <span class="text-red-800">👤</span>
         <a href="/login.php" class="text-red-800 font-semibold hover:underline">Đăng nhập</a>
         <span class="text-red-800">|</span>
         <a href="/register.php" class="text-red-800 font-semibold hover:underline">Đăng ký</a>
-      </div>
+      </div> -->
     </div>
   </div>
 </div>

@@ -1,4 +1,8 @@
 <?php
+// Đảm bảo session đã được khởi tạo
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 $action = $_GET['action'] ?? 'home';
 
 require_once __DIR__ . '/../config/config.php';
@@ -8,6 +12,11 @@ $db = $GLOBALS['conn'];
 if (!$db) {
     die("Kết nối database thất bại: Không tìm thấy kết nối");
 }
+
+// Kiểm tra "Remember me"
+require_once __DIR__ . '/../controllers/AuthController.php';
+$authController = new AuthController($db);
+$authController->checkRememberMe();
 
 switch ($action) {
     case 'home':
@@ -72,6 +81,35 @@ switch ($action) {
         $cartController = new CartController($db);
         $cartController->clearCart();
         break;
+    
+    case 'login':
+        $authController->showLoginForm();
+        break;
+        
+    case 'process_login':
+        $authController->processLogin();
+        break;
+        
+    case 'register':
+        $authController->showRegisterForm();
+        break;
+        
+    case 'process_register':
+        $authController->processRegister();
+        break;
+        
+    case 'logout':
+        $authController->logout();
+        break;
+        
+    case 'forgot_password':
+        $authController->showForgotPasswordForm();
+        break;
+        
+    case 'process_forgot_password':
+        $authController->processForgotPassword();
+        break;
+    
     
 
     default:
