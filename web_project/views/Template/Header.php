@@ -15,8 +15,8 @@
 <body class="bg-white font-sans text-sm text-gray-800">
 
 <!-- Header1  -->
-<div class=" bg-white h-19">
-  <div class="container mx-auto px-4 py-7 flex justify-between items-center">
+<div class=" bg-white" style="height: 60px;">
+  <div class="container mx-auto px-4 flex justify-between items-center" style="padding-top: 15px;">
     <!-- Thông báo -->
     <div class="text-red-800 text-xl">
     <?=
