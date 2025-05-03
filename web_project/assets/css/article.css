@@ -1,0 +1,28 @@
+/* Bổ sung đổ bóng mượt hơn khi hover bài viết */
+.card-hover:hover {
+    transform: translateY(-4px);
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Làm nội dung chi tiết đọc dễ hơn */
+  .prose {
+    font-family: 'Georgia', serif;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #1f2937;
+  }
+  
+  /* Tùy chỉnh màu cho liên kết */
+  a.btn-primary-custom {
+    background-color: #2563eb;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 0.25rem;
+    font-size: 0.875rem;
+  }
+  
+  a.btn-primary-custom:hover {
+    background-color: #1e40af;
+  }
+  
