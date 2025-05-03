@@ -16,7 +16,7 @@
 <div class="bg-white border border-gray-200 p-12 rounded-lg shadow-md max-w-xl w-full mx-auto">
   <h2 class="text-4xl font-bold text-gray-800 mb-4">Đăng nhập</h2>
   <p class="text-gray-500 text-base mb-6">
-    Đăng nhập tài khoản để tiếp tục trải nghiệm mua sách tại BookStore.
+    Đăng nhập tài khoản để tiếp tục trải nghiệm mua sản phẩm mình thích.
   </p>
 
   <form class="space-y-6">

@@ -56,7 +56,7 @@
   <div class=" w-3/4 mx-auto py-4 flex items-center justify-between">
     
     <!-- Logo App -->
-    <div class="flex-shrink-0 pl-3 ">
+    <div class="flex-shrink-0 pl-2 pr-5 ">
       <h1 class="text-3xl font-bold leading-tight">
       <?="".($GLOBALS['site_info']['Company_name'] ?? 'Chưa có tên') ?>
         
@@ -80,8 +80,11 @@
       
       <!-- search -->
        
+
+
       <form class="mx-auto" style="width: 480px;" action="index.php" method="GET">
       <input type="hidden" name="action" value="products">
+        
       <label for="default-search" class="mb-2 pl-6 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
 
       <div class="relative">
@@ -119,8 +122,9 @@
     </form>
     </div>
     <!-- Giỏ hàng -->
-    <div class="ml-1">
-        <img src="../../assets/images/shopping-cart.png" class="h-12 w-12" alt="Giỏ hàng" />
-        </div>
+    <div class="ml-5">
+    <img src="/MUJI/web_project/assets/images/shopping-cart.png" class="h-12 w-12">
+
+    </div>
   </div>
 </div>
