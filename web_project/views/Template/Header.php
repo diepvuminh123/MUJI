@@ -6,6 +6,7 @@
   <!-- <title>Home</title> -->
   <title><?php echo $page_title ?? 'Home'; ?></title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />   <!-- Tailwind CSS CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> <!-- Font Awesome CDN -->
   <link href="../../assets/css/products.css" rel="stylesheet" />
   <script src="../../assets/js/Header.js"></script>
 </head>
@@ -120,7 +121,10 @@
     </div>
     <!-- Giỏ hàng -->
     <div class="ml-1">
-        <img src="../../assets/images/shopping-cart.png" class="h-12 w-12" alt="Giỏ hàng" />
-        </div>
+        <a href="index.php?action=cart" class="flex items-center text-red-800 font-semibold hover:underline">
+          <span class="text-2xl">Giỏ hàng </span>
+        <img src="../../assets/images/shopping-cart.png" class="h-12 w-12" alt="Giỏ hàng"/>
+         </a>
+      </div>
   </div>
 </div>
