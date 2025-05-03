@@ -60,9 +60,9 @@ INSERT INTO products (category_id, name, slug, description, price, sale_price, q
 
 -- Insert product images
 INSERT INTO product_images (product_id, image_path, is_primary) VALUES 
-(1, '/uploads/products/ao-thun-nam-1.jpg', 1),
-(1, '/uploads/products/ao-thun-nam-2.jpg', 0),
-(2, '/uploads/products/quan-jean-nam-1.jpg', 1),
-(3, '/uploads/products/ao-so-mi-nu-1.jpg', 1),
-(4, '/uploads/products/quan-culottes-nu-1.jpg', 1),
-(5, '/uploads/products/smartphone-1.jpg', 1);
+(1, 'MUJI/web_project/uploads/products/ao-thun-nam-1.jpg', 1),
+(1, 'MUJI/web_project/uploads/products/ao-thun-nam-2.jpg', 0),
+(2, 'MUJI/web_project/uploads/products/quan-jean-nam-1.jpg', 1),
+(3, 'MUJI/web_project/uploads/products/ao-so-mi-nu-1.jpg', 1),
+(4, 'MUJI/web_project/uploads/products/quan-culottes-nu-1.jpg', 1),
+(5, 'MUJI/web_project/uploads/products/smartphone-1.jpg', 1);
