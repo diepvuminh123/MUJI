@@ -1,3 +1,12 @@
+<?php
+require_once __DIR__ . '/../config/config.php';
+require_once __DIR__ . '/../controllers/ContactController.php';
+
+// Khởi tạo controller
+$controller = new ContactController($conn);
+$result = $controller->handleFormSubmission(); // xử lý nếu có gửi form
+?>
+
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -7,6 +16,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-100">
+  <?php include 'Template/Header.php'; ?>
 
   <div class="mt-10 px-4">
     <div class="grid sm:grid-cols-2 items-start gap-16 p-12 mx-auto max-w-6xl bg-white shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] rounded-lg">
@@ -34,7 +44,13 @@
       </div>
 
       <!-- Form bên phải -->
-      <form class="space-y-5 w-full bg-white">
+      <form method="post" action="" class="space-y-5 w-full bg-white">
+        <?php if (!empty($result['success'])): ?>
+          <div class="text-green-600 font-semibold">✔️ Gửi thành công! Cảm ơn bạn đã liên hệ.</div>
+        <?php elseif (!empty($result['error'])): ?>
+          <div class="text-red-600 font-semibold">❌ <?= htmlspecialchars($result['error']) ?></div>
+        <?php endif; ?>
+
         <input type="text" name="name" placeholder="Họ và tên" required
           class="w-full rounded-md py-4 px-5 border border-gray-300 text-base text-gray-800 outline-none focus:ring-2 focus:ring-blue-500" />
         <input type="email" name="email" placeholder="Email của bạn" required
@@ -51,5 +67,6 @@
     </div>
   </div>
 
+  <?php include 'Template/Footer.php'; ?>
 </body>
 </html>

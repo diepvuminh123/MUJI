@@ -83,8 +83,11 @@
       
       <!-- search -->
        
+
+
       <form class="mx-auto" style="width: 480px;" action="index.php" method="GET">
       <input type="hidden" name="action" value="products">
+        
       <label for="default-search" class="mb-2 pl-6 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
 
       <div class="relative">
@@ -122,6 +125,7 @@
     </form>
     </div>
     <!-- Giỏ hàng -->
+<<<<<<< HEAD
     <!-- <div class="ml-1">
         <a href="index.php?action=cart" class="flex items-center text-red-800 font-semibold hover:underline">
             <img src="/MUJI/web_project/assets/images/shopping-cart.png" class="h-12 w-12" alt="Giỏ hàng"/>
@@ -147,6 +151,12 @@
               <?php endif; ?>
           </a>
       </div>
+=======
+    <div class="ml-5">
+    <img src="/MUJI/web_project/assets/images/shopping-cart.png" class="h-12 w-12">
+
+    </div>
+>>>>>>> 34ac8bfc9d07fbc97c45f581d7fce984831b94d9
   </div>
 </div>
 
