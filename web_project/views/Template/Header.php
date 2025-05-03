@@ -7,8 +7,10 @@
   <title><?php echo $page_title ?? 'Home'; ?></title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />   <!-- Tailwind CSS CDN -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> <!-- Font Awesome CDN -->
-  <link href="../../assets/css/products.css" rel="stylesheet" />
-  <script src="../../assets/js/Header.js"></script>
+  <link href="/MUJI/web_project/assets/css/products.css" rel="stylesheet" />
+  <link href="/MUJI/web_project/assets/css/footer.css" rel="stylesheet" />
+  <script src="/MUJI/web_project/assets/js/Header.js"></script>
+  <script src="/MUJI/web_project/assets/js/main.js"></script>
 </head>
 <body class="bg-white font-sans text-sm text-gray-800">
 
@@ -57,7 +59,7 @@
   <div class=" w-3/4 mx-auto py-4 flex items-center justify-between">
     
     <!-- Logo App -->
-    <div class="flex-shrink-0 pl-3 ">
+    <div class="flex-shrink-0 pl-2 pr-5 ">
       <h1 class="text-3xl font-bold leading-tight">
       <?="".($GLOBALS['site_info']['Company_name'] ?? 'Chưa có tên') ?>
         
@@ -120,11 +122,51 @@
     </form>
     </div>
     <!-- Giỏ hàng -->
-    <div class="ml-1">
+    <!-- <div class="ml-1">
         <a href="index.php?action=cart" class="flex items-center text-red-800 font-semibold hover:underline">
-          <span class="text-2xl">Giỏ hàng </span>
-        <img src="../../assets/images/shopping-cart.png" class="h-12 w-12" alt="Giỏ hàng"/>
+            <img src="/MUJI/web_project/assets/images/shopping-cart.png" class="h-12 w-12" alt="Giỏ hàng"/>
          </a>
+      </div> -->
+      <!-- Cart -->
+      <div class="position-relative">
+          <a href="index.php?action=cart" class="text-dark d-flex align-items-center text-decoration-none">
+              <i class="fas fa-shopping-cart fs-5 me-2"></i>
+              <span class="d-none d-lg-inline">Giỏ hàng</span>
+              <?php
+              // Get cart count
+              $cartCount = 0;
+              if (isset($cartModel)) {
+                  $userId = isset($_SESSION['user']) ? $_SESSION['user']['id'] : null;
+                  $cartCount = $cartModel->countCartItems($userId, session_id());
+              }
+              ?>
+              <?php if ($cartCount > 0): ?>
+                  <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="cart-count">
+                      <?php echo $cartCount; ?>
+                  </span>
+              <?php endif; ?>
+          </a>
       </div>
   </div>
 </div>
+
+      <main>
+        <?php if (isset($_SESSION['success_message'])): ?>
+            <div class="container mt-3">
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <?php echo $_SESSION['success_message']; ?>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>
+            <?php unset($_SESSION['success_message']); ?>
+        <?php endif; ?>
+        
+        <?php if (isset($_SESSION['error_message'])): ?>
+            <div class="container mt-3">
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <?php echo $_SESSION['error_message']; ?>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>
+            <?php unset($_SESSION['error_message']); ?>
+        <?php endif; ?>
