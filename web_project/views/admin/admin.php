@@ -56,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_GET['action'] ?? '') === 'update
     // MỞ RỘNG: Thêm xử lý lỗi cho các cập nhật không thành công
     
     // Hiển thị thông báo thành công
-    echo "<div class='alert alert-success text-center' id='success-alert'>Cập nhật thành công!</div>";
+    echo "<div class='alert alert-success text-center fs-5' id='success-alert'>Cập nhật thành công 🥳🥳🥳</div>";
 }
 
 // Tải tất cả thông tin trang web vào một mảng toàn cục để dễ dàng truy cập trong toàn bộ ứng dụng
@@ -78,7 +78,11 @@ $GLOBALS['site_info'] = [
   <!-- CSS Stylesheets -->
   <link rel="stylesheet" href="./assets/compiled/css/app.css">
   <link rel="stylesheet" href="./assets/compiled/css/app-dark.css">
-  <link rel="stylesheet" href="./assets/compiled/css/iconly.css">
+  <!--font-->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./assets/compiled/css/admin.css">
   <style>
     /* Hiệu ứng cho cảnh báo thành công */
     #success-alert {
@@ -146,50 +150,50 @@ $GLOBALS['site_info'] = [
       <section class="row">
         <?php if (($_GET['action'] ?? '') === 'updateSiteInfo'): ?>
           <!-- Phần Cập nhật Thông tin Trang web -->
-          <div class="col-12 col-lg-8">
+          <div class="col-12 col-lg-8 mx-auto ">
             <!-- Thẻ Thông tin Hiện tại -->
-            <div class="card mt-4">
+            <div class="card mt-4 hover-shadow">
               <div class="card-header">
-                <h4>Thông tin hiện tại</h4>
+                <h3>Thông tin hiện tại</h3>
               </div>
-              <div class="card-body text-center">
-                <p class="mt-2"><strong>Tên công ty (Logo):</strong> <?= htmlspecialchars($GLOBALS['site_info']['Company_name']) ?></p>
-                <p class="mt-2"><strong>Hotline:</strong> <?= htmlspecialchars($GLOBALS['site_info']['hotline']) ?></p>
-                <p><strong>Địa chỉ:</strong> <?= htmlspecialchars($GLOBALS['site_info']['address']) ?></p>
-                <p><strong>Slogan:</strong> <?= htmlspecialchars($GLOBALS['site_info']['Slogan']) ?></p>
+              <div class="card-body text-center ">
+                <p class="mt-2 fs-3"><strong>Tên công ty (Logo):</strong> <?= htmlspecialchars($GLOBALS['site_info']['Company_name']) ?></p>
+                <p class="mt-2 fs-3"><strong>Hotline: </strong> <?= htmlspecialchars($GLOBALS['site_info']['hotline']) ?></p>
+                <p class="fs-3"><strong>Địa chỉ:</strong> <?= htmlspecialchars($GLOBALS['site_info']['address']) ?></p>
+                <p class="fs-3"><strong>Slogan:</strong> <?= htmlspecialchars($GLOBALS['site_info']['Slogan']) ?></p>
                 <!-- MỞ RỘNG: Thêm các trường thông tin khác tại đây -->
               </div>
             </div>
             
             <!-- Biểu mẫu Chỉnh sửa Thông tin Trang web -->
-            <div class="card mt-4">
-              <div class="card-header">
-                <h4>Chỉnh sửa thông tin công ty</h4>
+            <div class="card mt-4 hover-shadow">
+              <div class="card-header ">
+                <h3>Chỉnh sửa thông tin công ty</h3>
               </div>
               <div class="card-body">
                 <form method="post" action="?action=updateSiteInfo" enctype="multipart/form-data">
                   <!-- Trường Hotline -->
-                  <div class="mb-3">
+                  <div class="mb-3 fs-4">
                     <label class="form-label">Hotline:</label>
-                    <input type="text" name="hotline" class="form-control" value="<?= htmlspecialchars($GLOBALS['site_info']['hotline']) ?>" required>
+                    <input type="text" name="hotline" class="form-control fs-4" value="<?= htmlspecialchars($GLOBALS['site_info']['hotline']) ?>" required>
                   </div>
                   <!-- Trường Địa chỉ -->
-                  <div class="mb-3">
+                  <div class="mb-3 fs-4">
                     <label class="form-label">Địa chỉ:</label>
-                    <input type="text" name="address" class="form-control" value="<?= htmlspecialchars($GLOBALS['site_info']['address']) ?>" required>
+                    <input type="text" name="address" class="form-control fs-4" value="<?= htmlspecialchars($GLOBALS['site_info']['address']) ?>" required>
                   </div>
                   <!-- Trường Tên công ty -->
-                  <div class="mb-3">
+                  <div class="mb-3 fs-4">
                     <label class="form-label">Tên công ty (Logo):</label>
-                    <input type="text" name="Company_name" class="form-control" value="<?= htmlspecialchars($GLOBALS['site_info']['Company_name']) ?>" required>
+                    <input type="text" name="Company_name" class="form-control fs-4" value="<?= htmlspecialchars($GLOBALS['site_info']['Company_name']) ?>" required>
                   </div>
                   <!-- Trường Slogan -->
-                  <div class="mb-3">
+                  <div class="mb-3 fs-4">
                     <label class="form-label">Slogan:</label>
-                    <input type="text" name="Slogan" class="form-control" value="<?= htmlspecialchars($GLOBALS['site_info']['Slogan']) ?>" required>
+                    <input type="text" name="Slogan" class="form-control fs-4" value="<?= htmlspecialchars($GLOBALS['site_info']['Slogan']) ?>" required>
                   </div>
                   <!-- MỞ RỘNG: Thêm các trường biểu mẫu khác tại đây -->
-                  <button type="submit" class="btn btn-primary">Cập nhật</button>
+                  <button type="submit" class="btn btn-primary btn-lg ">Cập nhật</button>
                 </form>
               </div>
             </div>
@@ -215,6 +219,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $curr = (int)$res->fetch_assoc()['is_read'];
             $conn->query("UPDATE contact_messages SET is_read = " . (1 - $curr) . " WHERE id = $id");
             // MỞ RỘNG: Thêm thông báo thành công/thất bại
+           
+            $page = $_GET['page'] ?? 1;
+            header("Location: admin.php?action=viewContacts&page=$page");
         }
     }
 
@@ -284,7 +291,7 @@ $result = $conn->query($query);
 <div class="col-12 col-lg-12">
   <div class="card mt-4">
     <div class="card-header d-flex justify-content-between align-items-center">
-      <h4>Danh sách tin nhắn liên hệ</h4>
+      <h3>Danh sách tin nhắn liên hệ</h3>
       
     </div>
     <div class="card-body">
@@ -292,24 +299,24 @@ $result = $conn->query($query);
         <!-- Bảng Tin nhắn -->
         <div class="table-responsive">
           <table class="table table-bordered table-striped align-middle">
-            <thead class="table-dark">
+            <thead class="table ">
               <tr>
-                <th><input type="checkbox" id="check-all"></th>
-                <th>#</th>
-                <th>Họ tên</th>
-                <th>Email</th>
-                <th>Tiêu đề</th>
-                <th>Nội dung</th>
-                <th>Thời gian</th>
-                <th>Trả lời</th>
-                <th>Hành động</th>
+                <th></th>
+                <th class="fs-5">Số thứ tự</th>
+                <th class="fs-5" >Họ tên</th>
+                <th class="fs-5">Email</th>
+                <th class="fs-5">Tiêu đề</th>
+                <th class="fs-5">Nội dung</th>
+                <th class="fs-5">Thời gian</th>
+                <th class="fs-5">Trả lời</th>
+                <th class="fs-5">Thao tác</th>
               </tr>
             </thead>
             <tbody>
               <?php if ($result && $result->num_rows > 0): ?>
                 <?php $i = $offset + 1; while($row = $result->fetch_assoc()): ?>
                   <!-- Hàng tin nhắn (nền xám cho tin nhắn đã đọc) -->
-                  <tr class="<?= $row['is_read'] ? 'table-secondary' : '' ?>">
+                  <tr class="<?= $row['is_read'] ? 'table-light' : '' ?>">
                     <td><input type="checkbox" name="selected_ids[]" value="<?= $row['id'] ?>"></td>
                     <td><?= $i++ ?></td>
                     <td><?= htmlspecialchars($row['name']) ?></td>
@@ -331,7 +338,7 @@ $result = $conn->query($query);
                         <form method="post" class="mt-2 d-none" id="reply-form-<?= $row['id'] ?>">
                           <input type="hidden" name="reply_id" value="<?= $row['id'] ?>">
                           <textarea name="reply_content" rows="2" class="form-control mb-2" placeholder="Nhập phản hồi..." required></textarea>
-                          <button type="submit" name="send_reply" class="btn btn-sm btn-primary">📤 Gửi trả lời</button>
+                          <button type="submit" name="send_reply" class="btn btn-sm btn-primary">Gửi trả lời</button>
                         </form>
                       <?php endif; ?>
                     </td>
@@ -365,11 +372,11 @@ $result = $conn->query($query);
 
       <!-- Phân trang -->
       <?php if ($total_pages > 1): ?>
-        <nav class="mt-4">
+        <nav class="mt-4 fs-3">
           <ul class="pagination justify-content-center">
             <?php for ($p = 1; $p <= $total_pages; $p++): ?>
               <li class="page-item <?= $p == $page ? 'active' : '' ?>">
-                <a class="page-link" href="admin.php?action=viewContacts&page=<?= $p ?>"><?= $p ?></a>
+                <a class="page-link fs-4" href="admin.php?action=viewContacts&page=<?= $p ?>"><?= $p ?></a>
               </li>
             <?php endfor; ?>
           </ul>
