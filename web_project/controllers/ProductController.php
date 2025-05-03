@@ -66,6 +66,12 @@ class ProductController {
         
         // Get product images
         $images = $this->productModel->getProductImages($product['id']);
+        foreach ($images as &$image) {
+            // Nếu đường dẫn không bắt đầu bằng '/', thêm '/' vào
+            if (substr($image['image_path'], 0, 1) !== '/') {
+                $image['image_path'] = '/' . $image['image_path'];
+            }
+        }
         
         // Get related products
         $relatedProducts = $this->productModel->getRelatedProducts($product['id'], $product['category_id']);

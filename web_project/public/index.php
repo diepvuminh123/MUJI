@@ -111,7 +111,10 @@ switch ($action) {
         break;
     
     
-
+    // default:
+    // header("HTTP/1.0 404 Not Found");
+    // require_once __DIR__ . '/../views/errors/404.php';
+    // break;
     default:
         echo "404 - Không tìm thấy hành động.";
         break;

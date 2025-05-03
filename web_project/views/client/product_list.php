@@ -71,7 +71,10 @@ include  __DIR__ . '/../Template/Header.php';
                             <div class="card h-100 product-card">
                                 <!-- Product image -->
                                 <a href="index.php?action=product&slug=<?php echo $product['slug']; ?>">
-                                    <img src="<?php echo !empty($product['primary_image']) ? $product['primary_image'] : 'assets/images/no-image.jpg'; ?>" 
+                                    <!-- <img src="<?php echo !empty($product['primary_image']) ? $product['primary_image'] : 'assets/images/no-image.jpg'; ?>"  -->
+                                    <img src="<?php echo !empty($product['primary_image']) ? 
+                    (substr($product['primary_image'], 0, 1) === '/' ? $product['primary_image'] : '/'.$product['primary_image']) : 
+                    '/assets/images/no-image.jpg'; ?>" 
                                          class="card-img-top" alt="<?php echo htmlspecialchars($product['name']); ?>">
                                 </a>
                                 
