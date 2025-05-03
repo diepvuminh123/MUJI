@@ -285,9 +285,7 @@ $result = $conn->query($query);
   <div class="card mt-4">
     <div class="card-header d-flex justify-content-between align-items-center">
       <h4>Danh sách tin nhắn liên hệ</h4>
-      <form method="post" onsubmit="return confirm('Bạn có chắc muốn xóa tất cả tin nhắn đã đọc?');">
-        <button name="delete_read" type="submit" class="btn btn-danger btn-sm">🗑 Xóa mục đã đọc</button>
-      </form>
+      
     </div>
     <div class="card-body">
       <form method="post" id="messages-form">
@@ -341,8 +339,8 @@ $result = $conn->query($query);
                       <!-- Biểu mẫu chuyển đổi trạng thái đã đọc/chưa đọc -->
                       <form method="post">
                         <input type="hidden" name="toggle_read" value="<?= $row['id'] ?>">
-                        <button type="submit" class="btn btn-sm <?= $row['is_read'] ? 'btn-secondary' : 'btn-outline-success' ?>">
-                          <?= $row['is_read'] ? '↩ Khôi phục' : '✔ Đã đọc' ?>
+                        <button type="submit" class="btn btn-light <?= $row['is_read'] ? 'btn-outline-success' : 'btn btn-success' ?>">
+                          <?= $row['is_read'] ? 'Đã đọc' : 'Chưa đọc' ?>
                         </button>
                       </form>
                     </td>
@@ -358,9 +356,9 @@ $result = $conn->query($query);
 
         <!-- Hành động cho các tin nhắn đã chọn - Đã sửa để thêm các nút mới và sắp xếp cùng hàng -->
         <div class="mt-3 d-flex gap-2">
-          <button type="submit" name="mark_selected_read" class="btn btn-success">✔ Đánh dấu đã đọc</button>
-          <button type="submit" name="mark_selected_unread" class="btn btn-warning">📩 Đánh dấu chưa đọc</button>
-          <button type="submit" name="delete_selected" class="btn btn-danger" onclick="return confirm('Bạn có chắc muốn xóa các mục đã chọn?')">🗑 Xóa mục đã chọn</button>
+        <form method="post" onsubmit="return confirm('Bạn có chắc muốn xóa tất cả tin nhắn đã đọc?');">
+          <button name="delete_read" type="submit" class="btn btn-danger btn-lg"> Xóa mục đã đọc</button>
+        </form>
         </div>
         <!-- MỞ RỘNG: Thêm nhiều hành động hàng loạt hơn tại đây (gửi email hàng loạt, v.v.) -->
       </form>
@@ -400,13 +398,7 @@ $result = $conn->query($query);
   });
   
   // Đảm bảo không có form trả lời nào được mở khi tải trang
-  document.addEventListener('DOMContentLoaded', function() {
-    // Ẩn tất cả các form trả lời khi trang được tải
-    const replyForms = document.querySelectorAll('[id^="reply-form-"]');
-    replyForms.forEach(form => {
-      form.classList.add('d-none');
-    });
-  });
+  
   
   // MỞ RỘNG: Thêm hộp thoại xác nhận cho các hành động
   // MỞ RỘNG: Thêm chức năng tìm kiếm/lọc
