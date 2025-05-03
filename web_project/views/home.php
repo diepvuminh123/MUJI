@@ -21,26 +21,24 @@
       <!-- Wrapper -->
       <div class="relative h-56 overflow-hidden rounded-lg md:h-96" style="height: 650px;">
 
-        <!-- Slide 1 -->
-        <div class="hidden duration-700 ease-in-out" data-carousel-item>
-          <img src="../uploads/Gray.jpg " class="absolute block w-full h-full object-cover top-0 left-0" alt="Slide 1">
-        </div>
-        <!-- Slide 2 (active) -->
-        <div class="hidden duration-700 ease-in-out" data-carousel-item="active">
-          <img src="../uploads/Gray.jpg" class="absolute block w-full h-full object-cover top-0 left-0" alt="Slide 2">
-        </div>
-        <!-- Slide 3 -->
-        <div class="hidden duration-700 ease-in-out" data-carousel-item>
-          <img src="../uploads/Gray.jpg" class="absolute block w-full h-full object-cover top-0 left-0" alt="Slide 3">
-        </div>
-        <!-- Slide 4 -->
-        <div class="hidden duration-700 ease-in-out" data-carousel-item>
-          <img src="../uploads/Gray.jpg" class="absolute block w-full h-full object-cover top-0 left-0" alt="Slide 4">
-        </div>
-        <!-- Slide 5 -->
-        <div class="hidden duration-700 ease-in-out" data-carousel-item>
-          <img src="../uploads/Gray.jpg" class="absolute block w-full h-full object-cover top-0 left-0" alt="Slide 5">
-        </div>
+      <?php
+$first = true;
+foreach ($GLOBALS['slider_images'] as $img):
+    $path = '../' . $img['image_path']; // CHỈNH ĐƯỜNG DẪN
+    echo '<!-- DEBUG: ' . $path . ' -->'; // hiển thị đường dẫn HTML xem có đúng không
+?>
+  <div class="hidden duration-700 ease-in-out" data-carousel-item<?= $first ? '="active"' : '' ?>>
+    <img src="<?= $path ?>" class="absolute block w-full h-full object-cover top-0 left-0" alt="Slide">
+  </div>
+<?php
+$first = false;
+endforeach;
+?>
+
+$first = false;
+endforeach;
+?>
+
       </div>
 
       <!-- Navigation buttons -->
