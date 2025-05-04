@@ -53,7 +53,7 @@
                   </a>
                   <ul class="dropdown-menu" aria-labelledby="userDropdown">
                       <?php if ($_SESSION['user']['role'] === 'admin'): ?>
-                          <li><a class="dropdown-item" href="index.php?action=admin_dashboard">Quản trị</a></li>
+                          <li><a class="dropdown-item" href="index.php?action=admin">Quản trị</a></li>
                       <?php endif; ?>
                       <!-- <li><a class="dropdown-item" href="index.php?action=profile">Tài khoản của tôi</a></li> -->
                       <li><a class="dropdown-item" href="index.php?action=my_orders">Đơn hàng của tôi</a></li>
