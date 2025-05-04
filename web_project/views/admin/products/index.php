@@ -111,7 +111,7 @@ if (isset($_SESSION['error_message'])) {
                                                 <a href="admin.php?action=editProduct&id=<?php echo $product['id']; ?>" class="btn btn-sm btn-primary">
                                                     <i class="fas fa-edit"></i> Sửa
                                                 </a>
-                                                <a href="index.php?action=product&slug=<?php echo $product['slug']; ?>" class="btn btn-sm btn-info" target="_blank">
+                                                <a href="admin.php?action=product&slug=<?php echo $product['slug']; ?>" class="btn btn-sm btn-info" target="_blank">
                                                     <i class="fas fa-eye"></i> Xem
                                                 </a>
                                                 <button type="button" class="btn btn-sm btn-danger" 

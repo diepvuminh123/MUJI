@@ -24,6 +24,10 @@ switch ($action) {
         (new HomeController())->index();
         break;
 
+    case 'admin':
+        require_once '../views/admin/admin.php';
+        break;
+
     case 'showSiteInfo':
         require_once '../controllers/AdminController.php';
         (new AdminController())->showForm();
