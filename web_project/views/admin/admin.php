@@ -153,6 +153,13 @@ $GLOBALS['site_info'] = [
               <?php endif; ?>
             </ul>
           </li>
+                      <!-- Mục Menu Quản lý Đơn hàng -->
+                      <li class="sidebar-item <?= (($_GET['action'] ?? '') === 'adminOrders' || ($_GET['action'] ?? '') === 'viewOrder' || ($_GET['action'] ?? '') === 'orderInvoice') ? 'active' : '' ?>">
+            <a href="admin.php?action=adminOrders" class="sidebar-link">
+                <i class="bi bi-cart-check"></i>
+                <span>Quản lý đơn hàng</span>
+            </a>
+          </li>
          <!-- MỞ RỘNG: Thêm các mục menu mới tại đây -->
         </ul>
       </div>
