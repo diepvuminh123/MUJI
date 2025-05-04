@@ -68,6 +68,67 @@ $GLOBALS['site_info'] = [
     'Slogan' => getSiteValue($conn, 'Slogan')
     // MỞ RỘNG: Thêm các trường thông tin trang web mới tại đây
 ];
+
+// Check admin authentication
+if (($_GET['action'] ?? '') !== 'showSiteInfo' && ($_GET['action'] ?? '') !== 'updateSiteInfo') {
+  if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'admin') {
+      $_SESSION['error_message'] = 'Bạn cần đăng nhập với tư cách quản trị viên để truy cập trang này.';
+      header('Location: index.php?action=login');
+      exit;
+  }
+}
+
+// Handle admin actions
+switch ($_GET['action'] ?? '') {
+  case 'showSiteInfo':
+  case 'updateSiteInfo':
+  case 'viewContacts':
+      // These are handled by the existing code in admin.php
+      break;
+      
+  // Product Management
+  case 'adminProducts':
+      require_once __DIR__ . '/../controllers/AdminProductController.php';
+      $adminProductController = new AdminProductController($db);
+      $adminProductController->index();
+      exit; // Add exit to prevent the rest of admin.php from executing
+      
+  case 'createProduct':
+      require_once __DIR__ . '/../controllers/AdminProductController.php';
+      $adminProductController = new AdminProductController($db);
+      $adminProductController->create();
+      exit;
+      
+  case 'editProduct':
+      require_once __DIR__ . '/../controllers/AdminProductController.php';
+      $adminProductController = new AdminProductController($db);
+      $adminProductController->edit();
+      exit;
+      
+  case 'deleteProduct':
+      require_once __DIR__ . '/../controllers/AdminProductController.php';
+      $adminProductController = new AdminProductController($db);
+      $adminProductController->delete();
+      exit;
+      
+  case 'deleteImage':
+      require_once __DIR__ . '/../controllers/AdminProductController.php';
+      $adminProductController = new AdminProductController($db);
+      $adminProductController->deleteImage();
+      exit;
+      
+  case 'setPrimaryImage':
+      require_once __DIR__ . '/../controllers/AdminProductController.php';
+      $adminProductController = new AdminProductController($db);
+      $adminProductController->setPrimaryImage();
+      exit;
+      
+  case 'dashboard':
+  default:
+      // Default dashboard
+      // Continue with the existing code
+      break;
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -130,6 +191,13 @@ $GLOBALS['site_info'] = [
               <span>Xem liên hệ</span>
             </a>
          </li>
+         <!-- Mục Menu Quản lý Sản phẩm -->
+          <li class="sidebar-item <?= ($_GET['action'] ?? '') === 'adminProducts' || ($_GET['action'] ?? '') === 'createProduct' || ($_GET['action'] ?? '') === 'editProduct' ? 'active' : '' ?>">
+            <a href="admin.php?action=adminProducts" class="sidebar-link">
+              <i class="bi bi-box-seam"></i>
+              <span>Quản lý sản phẩm</span>
+            </a>
+          </li>
          <!-- MỞ RỘNG: Thêm các mục menu mới tại đây -->
         </ul>
       </div>
