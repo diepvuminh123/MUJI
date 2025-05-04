@@ -34,6 +34,24 @@ switch ($_GET['action'] ?? '') {
     case 'viewContacts':
         // These are handled by the existing code in admin.php
         break;
+
+    case 'products':
+        require_once __DIR__ . '/../controllers/ProductController.php';
+        $productController = new ProductController($db);
+        $productController->index();
+        break;
+        
+    case 'product':
+        require_once __DIR__ . '/../controllers/ProductController.php';
+        $productController = new ProductController($db);
+        $slug = $_GET['slug'] ?? '';
+        if (!empty($slug)) {
+            $productController->view($slug);
+        } else {
+            header('Location: index.php?action=products');
+            exit;
+        }
+        break;
     
         // Product Management
     case 'adminProducts':
