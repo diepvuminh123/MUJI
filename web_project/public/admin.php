@@ -115,6 +115,37 @@ switch ($_GET['action'] ?? '') {
         $adminOrderController->updateStatus();
         exit;
         
+    // Cart Management
+    case 'adminCarts':
+        require_once __DIR__ . '/../controllers/AdminCartController.php';
+        $adminCartController = new AdminCartController($db);
+        $adminCartController->index();
+        exit;
+        
+    case 'viewCart':
+        require_once __DIR__ . '/../controllers/AdminCartController.php';
+        $adminCartController = new AdminCartController($db);
+        $adminCartController->view();
+        exit;
+        
+    case 'removeCartItem':
+        require_once __DIR__ . '/../controllers/AdminCartController.php';
+        $adminCartController = new AdminCartController($db);
+        $adminCartController->removeCartItem();
+        exit;
+        
+    case 'clearCart':
+        require_once __DIR__ . '/../controllers/AdminCartController.php';
+        $adminCartController = new AdminCartController($db);
+        $adminCartController->clearCart();
+        exit;
+        
+    case 'deleteCart':
+        require_once __DIR__ . '/../controllers/AdminCartController.php';
+        $adminCartController = new AdminCartController($db);
+        $adminCartController->deleteCart();
+        exit;
+        
     case 'admin':
     default:
         require_once '../views/admin/admin.php';

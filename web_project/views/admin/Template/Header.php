@@ -167,6 +167,13 @@ if (isset($conn) && $conn) {
                 <span>Quản lý đơn hàng</span>
             </a>
             </li>
+            <!-- Mục Menu Quản lý Giỏ hàng -->
+            <li class="sidebar-item <?= (($_GET['action'] ?? '') === 'adminCarts' || ($_GET['action'] ?? '') === 'viewCart') ? 'active' : '' ?>">
+              <a href="admin.php?action=adminCarts" class="sidebar-link">
+                <i class="bi bi-cart"></i>
+                <span>Quản lý giỏ hàng</span>
+              </a>
+            </li>
         </ul>
       </div>
     </div>
