@@ -92,6 +92,13 @@
                 <span>Quản lý đơn hàng</span>
             </a>
           </li>
+          <li class="sidebar-item <?= ($_GET['action'] ?? '') === 'manageArticles' ? 'active' : '' ?>">
+            <a href="admin.php?action=manageArticles" class="sidebar-link">
+                <i class="bi bi-file-earmark-text-fill"></i>
+                <span>Quản lý bài viết</span>
+            </a>
+          </li>
+
          <!-- MỞ RỘNG: Thêm các mục menu mới tại đây -->
         </ul>
       </div>

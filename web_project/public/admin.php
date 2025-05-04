@@ -32,12 +32,16 @@ switch ($_GET['action'] ?? '') {
     
     case 'updateSiteInfo':
         require_once '../views/admin/edit_company.php';
-        break;
+        exit;
         
     // Quản lý tin nhắn liên hệ
     case 'viewContacts':
         require_once '../views/admin/contacts.php';
-        break;
+        exit;
+    case 'manageArticles':
+        require_once '../views/admin/articles.php';
+        exit;
+        
     case 'products':
         require_once __DIR__ . '/../controllers/ProductController.php';
         $productController = new ProductController($db);
