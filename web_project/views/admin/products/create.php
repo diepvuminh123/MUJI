@@ -1,3 +1,10 @@
+<?php 
+// Set page title
+$page_title = 'Thêm sản phẩm mới';
+
+// Include header template
+include __DIR__ . '/../Template/Header.php';
+?>
 <?php
 // Show success or error messages if they exist
 if (isset($_SESSION['success_message'])) {
@@ -224,3 +231,4 @@ if (isset($_SESSION['error_message'])) {
         });
     });
 </script>
+<?php include __DIR__ . '/../Template/Footer.php'; ?>

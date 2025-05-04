@@ -85,9 +85,10 @@ $GLOBALS['site_info'] = [
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/MUJI/web_project/views/admin/assets/compiled/css/admin.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     /* Hiệu ứng cho cảnh báo thành công */
-    #success-alert {
+    #success-alert, #error-alert {
       transition: opacity 1s ease;
     }
   </style>
@@ -133,11 +134,24 @@ $GLOBALS['site_info'] = [
             </a>
          </li>
          <!-- Mục Menu Quản lý Sản phẩm -->
-          <li class="sidebar-item <?= ($_GET['action'] ?? '') === 'adminProducts' || ($_GET['action'] ?? '') === 'createProduct' || ($_GET['action'] ?? '') === 'editProduct' ? 'active' : '' ?>">
-            <a href="index.php?action=adminProducts" class="sidebar-link">
+         <li class="sidebar-item has-sub <?= (($_GET['action'] ?? '') === 'adminProducts' || ($_GET['action'] ?? '') === 'createProduct' || ($_GET['action'] ?? '') === 'editProduct') ? 'active' : '' ?>">
+            <a href="javascript:void(0)" class="sidebar-link">
               <i class="bi bi-box-seam"></i>
               <span>Quản lý sản phẩm</span>
             </a>
+            <ul class="submenu <?= (($_GET['action'] ?? '') === 'adminProducts' || ($_GET['action'] ?? '') === 'createProduct' || ($_GET['action'] ?? '') === 'editProduct') ? 'active' : '' ?>">
+              <li class="submenu-item <?= ($_GET['action'] ?? '') === 'adminProducts' ? 'active' : '' ?>">
+                <a href="index.php?action=adminProducts">Xem danh sách</a>
+              </li>
+              <li class="submenu-item <?= ($_GET['action'] ?? '') === 'createProduct' ? 'active' : '' ?>">
+                <a href="index.php?action=createProduct">Thêm sản phẩm</a>
+              </li>
+              <?php if (($_GET['action'] ?? '') === 'editProduct'): ?>
+              <li class="submenu-item active">
+                <a href="#">Chỉnh sửa sản phẩm</a>
+              </li>
+              <?php endif; ?>
+            </ul>
           </li>
          <!-- MỞ RỘNG: Thêm các mục menu mới tại đây -->
         </ul>
@@ -210,7 +224,27 @@ $GLOBALS['site_info'] = [
         <?php endif; ?>
         
         <?php if (($_GET['action'] ?? '') === 'viewContacts'): ?>
+          <?php include __DIR__ . '/contacts.php'; ?>
+        <?php endif; ?>
+
+        <?php
+        // Phần quản lý sản phẩm - Dựa vào action để hiển thị trang tương ứng
+        if (($_GET['action'] ?? '') === 'adminProducts'): ?>
+          <?php include __DIR__ . '/products/index.php'; ?>
+        <?php endif; ?>
+
+        <?php if (($_GET['action'] ?? '') === 'createProduct'): ?>
+          <?php include __DIR__ . '/products/create.php'; ?>
+        <?php endif; ?>
+
+        <?php if (($_GET['action'] ?? '') === 'editProduct'): ?>
+          <?php include __DIR__ . '/products/edit.php'; ?>
+        <?php endif; ?>
+      </section>
+    </div>
+
 <?php
+
 /**
  * Phần Quản lý Tin nhắn Liên hệ
  * 
@@ -418,45 +452,54 @@ $result = $conn->query($query);
   
   // MỞ RỘNG: Thêm hộp thoại xác nhận cho các hành động
   // MỞ RỘNG: Thêm chức năng tìm kiếm/lọc
-</script>
-<?php endif; ?>
-
-
-
-
-      </section>
-    </div>
-
-    <!-- Chân trang -->
-    <footer>
-      <div class="footer clearfix mb-0 text-muted">
-        <div class="float-start">
-          <p>2023 &copy; Mazer</p>
-        </div>
-        <div class="float-end">
-          <p>Crafted with <span class="text-danger"><i class="bi bi-heart-fill icon-mid"></i></span> by <a href="https://saugi.me">Saugi</a></p>
-        </div>
-      </div>
-    </footer>
-  </div>
-</div>
-
 <!-- JavaScript cho tự động ẩn cảnh báo thành công -->
 <script>
   // Ẩn cảnh báo thành công sau 5 giây
   setTimeout(() => {
-    const alert = document.getElementById('success-alert');
-    if (alert) alert.style.opacity = '0';
+    const successAlert = document.getElementById('success-alert');
+    if (successAlert) successAlert.style.opacity = '0';
+    
+    const errorAlert = document.getElementById('error-alert');
+    if (errorAlert) errorAlert.style.opacity = '0';
   }, 5000);
+  
+  // Xử lý menu con (submenu)
+  document.addEventListener('DOMContentLoaded', function() {
+    const sidebarItems = document.querySelectorAll('.sidebar-item.has-sub');
+    
+    sidebarItems.forEach(item => {
+      item.querySelector('.sidebar-link').addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        item.classList.toggle('active');
+        const submenu = item.querySelector('.submenu');
+        if (submenu) {
+          submenu.classList.toggle('active');
+        }
+      });
+    });
+    
+    // Tự động mở submenu nếu có mục con đang active
+    const activeSubmenuItems = document.querySelectorAll('.submenu-item.active');
+    activeSubmenuItems.forEach(item => {
+      const parentSubmenu = item.closest('.submenu');
+      const parentItem = item.closest('.sidebar-item.has-sub');
+      
+      if (parentSubmenu && parentItem) {
+        parentSubmenu.classList.add('active');
+        parentItem.classList.add('active');
+      }
+    });
+  });
 </script>
 
 <!-- Tệp JavaScript Cốt lõi -->
-<script src="MUJI/web_project/views/admin/assets/static/js/components/dark.js"></script>
-<script src="MUJI/web_project/views/admin/assets/extensions/perfect-scrollbar/perfect-scrollbar.min.js"></script>
-<script src="MUJI/web_project/views/admin/assets/compiled/js/app.js"></script>
+<script src="/MUJI/web_project/views/admin/assets/static/js/components/dark.js"></script>
+<script src="/MUJI/web_project/views/admin/assets/extensions/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+<script src="/MUJI/web_project/views/admin/assets/compiled/js/app.js"></script>
 
 <!-- JavaScript Dành riêng cho Dashboard -->
-<script src="MUJI/web_project/views/admin/assets/extensions/apexcharts/apexcharts.min.js"></script>
-<script src="MUJI/web_project/views/admin/assets/static/js/pages/dashboard.js"></script>
+<script src="/MUJI/web_project/views/admin/assets/extensions/apexcharts/apexcharts.min.js"></script>
+<script src="/MUJI/web_project/views/admin/assets/static/js/pages/dashboard.js"></script>
 </body>
 </html>
