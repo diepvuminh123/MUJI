@@ -16,7 +16,7 @@ if (isset($_SESSION['error_message'])) {
         <div class="card mt-4">
             <div class="card-header d-flex justify-content-between align-items-center">
                 <h4 class="card-title">Quản lý sản phẩm</h4>
-                <a href="admin.php?action=createProduct" class="btn btn-primary">
+                <a href="index.php?action=createProduct" class="btn btn-primary">
                     <i class="fas fa-plus"></i> Thêm sản phẩm mới
                 </a>
             </div>
@@ -24,7 +24,7 @@ if (isset($_SESSION['error_message'])) {
                 <!-- Search form -->
                 <div class="row mb-4">
                     <div class="col-md-6">
-                        <form action="admin.php" method="GET" class="d-flex">
+                        <form action="index.php" method="GET" class="d-flex">
                             <input type="hidden" name="action" value="adminProducts">
                             <div class="input-group">
                                 <input type="text" class="form-control" placeholder="Tìm kiếm sản phẩm..." 
@@ -108,10 +108,10 @@ if (isset($_SESSION['error_message'])) {
                                         </td>
                                         <td>
                                             <div class="btn-group" role="group">
-                                                <a href="admin.php?action=editProduct&id=<?php echo $product['id']; ?>" class="btn btn-sm btn-primary">
+                                                <a href="index.php?action=editProduct&id=<?php echo $product['id']; ?>" class="btn btn-sm btn-primary">
                                                     <i class="fas fa-edit"></i> Sửa
                                                 </a>
-                                                <a href="admin.php?action=product&slug=<?php echo $product['slug']; ?>" class="btn btn-sm btn-info" target="_blank">
+                                                <a href="index.php?action=product&slug=<?php echo $product['slug']; ?>" class="btn btn-sm btn-info" target="_blank">
                                                     <i class="fas fa-eye"></i> Xem
                                                 </a>
                                                 <button type="button" class="btn btn-sm btn-danger" 
@@ -132,7 +132,7 @@ if (isset($_SESSION['error_message'])) {
                     <nav aria-label="Page navigation" class="mt-4">
                         <ul class="pagination justify-content-center">
                             <li class="page-item <?php echo ($data['currentPage'] <= 1) ? 'disabled' : ''; ?>">
-                                <a class="page-link" href="admin.php?action=adminProducts&page=<?php echo $data['currentPage'] - 1; ?><?php echo !empty($data['search']) ? '&search=' . urlencode($data['search']) : ''; ?>">
+                                <a class="page-link" href="index.php?action=adminProducts&page=<?php echo $data['currentPage'] - 1; ?><?php echo !empty($data['search']) ? '&search=' . urlencode($data['search']) : ''; ?>">
                                     <i class="fas fa-angle-left"></i>
                                 </a>
                             </li>
@@ -148,14 +148,14 @@ if (isset($_SESSION['error_message'])) {
                             for ($i = $startPage; $i <= $endPage; $i++):
                             ?>
                                 <li class="page-item <?php echo ($i == $data['currentPage']) ? 'active' : ''; ?>">
-                                    <a class="page-link" href="admin.php?action=adminProducts&page=<?php echo $i; ?><?php echo !empty($data['search']) ? '&search=' . urlencode($data['search']) : ''; ?>">
+                                    <a class="page-link" href="index.php?action=adminProducts&page=<?php echo $i; ?><?php echo !empty($data['search']) ? '&search=' . urlencode($data['search']) : ''; ?>">
                                         <?php echo $i; ?>
                                     </a>
                                 </li>
                             <?php endfor; ?>
                             
                             <li class="page-item <?php echo ($data['currentPage'] >= $data['totalPages']) ? 'disabled' : ''; ?>">
-                                <a class="page-link" href="admin.php?action=adminProducts&page=<?php echo $data['currentPage'] + 1; ?><?php echo !empty($data['search']) ? '&search=' . urlencode($data['search']) : ''; ?>">
+                                <a class="page-link" href="index.php?action=adminProducts&page=<?php echo $data['currentPage'] + 1; ?><?php echo !empty($data['search']) ? '&search=' . urlencode($data['search']) : ''; ?>">
                                     <i class="fas fa-angle-right"></i>
                                 </a>
                             </li>
@@ -198,7 +198,7 @@ if (isset($_SESSION['error_message'])) {
     // Function to handle delete confirmation
     function confirmDelete(id, name) {
         document.getElementById('product-name').textContent = name;
-        document.getElementById('delete-link').href = 'admin.php?action=deleteProduct&id=' + id;
+        document.getElementById('delete-link').href = 'index.php?action=deleteProduct&id=' + id;
         
         // Show the modal
         var deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));

@@ -35,45 +35,11 @@ switch ($_GET['action'] ?? '') {
         // These are handled by the existing code in admin.php
         break;
         
-    // Product Management
-    case 'adminProducts':
-        require_once __DIR__ . '/../controllers/AdminProductController.php';
-        $adminProductController = new AdminProductController($db);
-        $adminProductController->index();
-        exit; // Add exit to prevent the rest of admin.php from executing
-        
-    case 'createProduct':
-        require_once __DIR__ . '/../controllers/AdminProductController.php';
-        $adminProductController = new AdminProductController($db);
-        $adminProductController->create();
-        exit;
-        
-    case 'editProduct':
-        require_once __DIR__ . '/../controllers/AdminProductController.php';
-        $adminProductController = new AdminProductController($db);
-        $adminProductController->edit();
-        exit;
-        
-    case 'deleteProduct':
-        require_once __DIR__ . '/../controllers/AdminProductController.php';
-        $adminProductController = new AdminProductController($db);
-        $adminProductController->delete();
-        exit;
-        
-    case 'deleteImage':
-        require_once __DIR__ . '/../controllers/AdminProductController.php';
-        $adminProductController = new AdminProductController($db);
-        $adminProductController->deleteImage();
-        exit;
-        
-    case 'setPrimaryImage':
-        require_once __DIR__ . '/../controllers/AdminProductController.php';
-        $adminProductController = new AdminProductController($db);
-        $adminProductController->setPrimaryImage();
-        exit;
+
         
     case 'admin':
     default:
+        require_once '../views/admin/admin.php';
         // Default dashboard
         // Continue with the existing code
         break;

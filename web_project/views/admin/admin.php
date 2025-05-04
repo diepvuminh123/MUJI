@@ -134,7 +134,7 @@ $GLOBALS['site_info'] = [
          </li>
          <!-- Mục Menu Quản lý Sản phẩm -->
           <li class="sidebar-item <?= ($_GET['action'] ?? '') === 'adminProducts' || ($_GET['action'] ?? '') === 'createProduct' || ($_GET['action'] ?? '') === 'editProduct' ? 'active' : '' ?>">
-            <a href="index.php?action=admin_products" class="sidebar-link">
+            <a href="index.php?action=adminProducts" class="sidebar-link">
               <i class="bi bi-box-seam"></i>
               <span>Quản lý sản phẩm</span>
             </a>

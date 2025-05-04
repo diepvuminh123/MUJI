@@ -149,37 +149,43 @@ switch ($action) {
         $checkoutController = new CheckoutController($db);
         $checkoutController->cancelOrder();
         break;
-    // Thêm các route cho quản lý sản phẩm admin vào phần switch-case trong index.php
-    // case 'admin_dashboard':
-    //     require_once __DIR__ . '/../controllers/AdminController.php';
-    //     $adminController = new AdminController($db);
-    //     $adminController->dashboard();
-    //     break;
 
-    case 'admin_products':
+    // Product Management
+    case 'adminProducts':
         require_once __DIR__ . '/../controllers/AdminProductController.php';
         $adminProductController = new AdminProductController($db);
         $adminProductController->index();
-        break;
-
-    case 'admin_create_product':
+        exit; // Add exit to prevent the rest of admin.php from executing
+        
+    case 'createProduct':
         require_once __DIR__ . '/../controllers/AdminProductController.php';
         $adminProductController = new AdminProductController($db);
         $adminProductController->create();
-        break;
-
-    case 'admin_edit_product':
+        exit;
+        
+    case 'editProduct':
         require_once __DIR__ . '/../controllers/AdminProductController.php';
         $adminProductController = new AdminProductController($db);
-        $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
-        $adminProductController->edit($id);
-        break;
-
-    case 'admin_delete_product':
+        $adminProductController->edit();
+        exit;
+        
+    case 'deleteProduct':
         require_once __DIR__ . '/../controllers/AdminProductController.php';
         $adminProductController = new AdminProductController($db);
         $adminProductController->delete();
-        break;
+        exit;
+        
+    case 'deleteImage':
+        require_once __DIR__ . '/../controllers/AdminProductController.php';
+        $adminProductController = new AdminProductController($db);
+        $adminProductController->deleteImage();
+        exit;
+        
+    case 'setPrimaryImage':
+        require_once __DIR__ . '/../controllers/AdminProductController.php';
+        $adminProductController = new AdminProductController($db);
+        $adminProductController->setPrimaryImage();
+        exit;
     
     // default:
     // header("HTTP/1.0 404 Not Found");
