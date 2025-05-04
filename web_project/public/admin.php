@@ -29,12 +29,15 @@ if (($_GET['action'] ?? '') !== 'showSiteInfo' && ($_GET['action'] ?? '') !== 'u
 
 // Handle admin actions
 switch ($_GET['action'] ?? '') {
-    case 'showSiteInfo':
+    
     case 'updateSiteInfo':
-    case 'viewContacts':
-        // These are handled by the existing code in admin.php
+        require_once '../views/admin/edit_company.php';
         break;
-
+        
+    // Quản lý tin nhắn liên hệ
+    case 'viewContacts':
+        require_once '../views/admin/contacts.php';
+        break;
     case 'products':
         require_once __DIR__ . '/../controllers/ProductController.php';
         $productController = new ProductController($db);
@@ -114,6 +117,8 @@ switch ($_GET['action'] ?? '') {
         $adminOrderController = new AdminOrderController($db);
         $adminOrderController->updateStatus();
         exit;
+
+    
         
     case 'admin':
     default:
