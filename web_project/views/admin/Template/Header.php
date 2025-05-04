@@ -141,25 +141,32 @@ if (isset($conn) && $conn) {
             </a>
          </li>
          <!-- Mục Menu Quản lý Sản phẩm -->
-         <li class="sidebar-item has-sub <?= (($_GET['action'] ?? '') === 'adminProducts' || ($_GET['action'] ?? '') === 'createProduct' || ($_GET['action'] ?? '') === 'editProduct') ? 'active' : '' ?>">
-            <a href="javascript:void(0)" class="sidebar-link">
-              <i class="bi bi-box-seam"></i>
-              <span>Quản lý sản phẩm</span>
+            <li class="sidebar-item has-sub <?= (($_GET['action'] ?? '') === 'adminProducts' || ($_GET['action'] ?? '') === 'createProduct' || ($_GET['action'] ?? '') === 'editProduct') ? 'active' : '' ?>">
+                <a href="javascript:void(0)" class="sidebar-link">
+                <i class="bi bi-box-seam"></i>
+                <span>Quản lý sản phẩm</span>
+                </a>
+                <ul class="submenu <?= (($_GET['action'] ?? '') === 'adminProducts' || ($_GET['action'] ?? '') === 'createProduct' || ($_GET['action'] ?? '') === 'editProduct') ? 'active' : '' ?>">
+                <li class="submenu-item <?= ($_GET['action'] ?? '') === 'adminProducts' ? 'active' : '' ?>">
+                    <a href="index.php?action=adminProducts">Xem danh sách</a>
+                </li>
+                <li class="submenu-item <?= ($_GET['action'] ?? '') === 'createProduct' ? 'active' : '' ?>">
+                    <a href="index.php?action=createProduct">Thêm sản phẩm</a>
+                </li>
+                <?php if (($_GET['action'] ?? '') === 'editProduct'): ?>
+                <li class="submenu-item active">
+                    <a href="#">Chỉnh sửa sản phẩm</a>
+                </li>
+                <?php endif; ?>
+                </ul>
+            </li>
+            <!-- Mục Menu Quản lý Đơn hàng -->
+            <li class="sidebar-item <?= (($_GET['action'] ?? '') === 'adminOrders' || ($_GET['action'] ?? '') === 'viewOrder' || ($_GET['action'] ?? '') === 'orderInvoice') ? 'active' : '' ?>">
+            <a href="admin.php?action=adminOrders" class="sidebar-link">
+                <i class="bi bi-cart-check"></i>
+                <span>Quản lý đơn hàng</span>
             </a>
-            <ul class="submenu <?= (($_GET['action'] ?? '') === 'adminProducts' || ($_GET['action'] ?? '') === 'createProduct' || ($_GET['action'] ?? '') === 'editProduct') ? 'active' : '' ?>">
-              <li class="submenu-item <?= ($_GET['action'] ?? '') === 'adminProducts' ? 'active' : '' ?>">
-                <a href="index.php?action=adminProducts">Xem danh sách</a>
-              </li>
-              <li class="submenu-item <?= ($_GET['action'] ?? '') === 'createProduct' ? 'active' : '' ?>">
-                <a href="index.php?action=createProduct">Thêm sản phẩm</a>
-              </li>
-              <?php if (($_GET['action'] ?? '') === 'editProduct'): ?>
-              <li class="submenu-item active">
-                <a href="#">Chỉnh sửa sản phẩm</a>
-              </li>
-              <?php endif; ?>
-            </ul>
-          </li>
+            </li>
         </ul>
       </div>
     </div>

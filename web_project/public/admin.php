@@ -71,7 +71,31 @@ switch ($_GET['action'] ?? '') {
         $adminProductController = new AdminProductController($db);
         $adminProductController->setPrimaryImage();
         exit;
-
+    
+    // Order Management
+    case 'adminOrders':
+        require_once __DIR__ . '/../controllers/AdminOrderController.php';
+        $adminOrderController = new AdminOrderController($db);
+        $adminOrderController->index();
+        exit;
+        
+    case 'viewOrder':
+        require_once __DIR__ . '/../controllers/AdminOrderController.php';
+        $adminOrderController = new AdminOrderController($db);
+        $adminOrderController->view();
+        exit;
+        
+    case 'orderInvoice':
+        require_once __DIR__ . '/../controllers/AdminOrderController.php';
+        $adminOrderController = new AdminOrderController($db);
+        $adminOrderController->invoice();
+        exit;
+        
+    case 'updateOrderStatus':
+        require_once __DIR__ . '/../controllers/AdminOrderController.php';
+        $adminOrderController = new AdminOrderController($db);
+        $adminOrderController->updateStatus();
+        exit;
         
     case 'admin':
     default:
