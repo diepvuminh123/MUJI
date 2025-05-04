@@ -109,6 +109,42 @@ switch ($action) {
     case 'process_forgot_password':
         $authController->processForgotPassword();
         break;
+
+    case 'checkout':
+        require_once __DIR__ . '/../controllers/CheckoutController.php';
+        $checkoutController = new CheckoutController($db);
+        $checkoutController->index();
+        break;
+        
+    case 'place_order':
+        require_once __DIR__ . '/../controllers/CheckoutController.php';
+        $checkoutController = new CheckoutController($db);
+        $checkoutController->placeOrder();
+        break;
+        
+    case 'order_confirmation':
+        require_once __DIR__ . '/../controllers/CheckoutController.php';
+        $checkoutController = new CheckoutController($db);
+        $checkoutController->orderConfirmation();
+        break;
+        
+    case 'my_orders':
+        require_once __DIR__ . '/../controllers/CheckoutController.php';
+        $checkoutController = new CheckoutController($db);
+        $checkoutController->myOrders();
+        break;
+        
+    case 'order_detail':
+        require_once __DIR__ . '/../controllers/CheckoutController.php';
+        $checkoutController = new CheckoutController($db);
+        $checkoutController->orderDetail();
+        break;
+        
+    case 'cancel_order':
+        require_once __DIR__ . '/../controllers/CheckoutController.php';
+        $checkoutController = new CheckoutController($db);
+        $checkoutController->cancelOrder();
+        break;
     
     
     // default:

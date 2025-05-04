@@ -199,4 +199,4 @@ INSERT INTO product_images (product_id, image_path, is_primary) VALUES
 (43, 'MUJI/web_project/uploads/products/son-moi-1.jpg', 1),
 (44, 'MUJI/web_project/uploads/products/phan-phu-1.jpg', 1),
 (45, 'MUJI/web_project/uploads/products/sua-rua-mat-1.jpg', 1),
-(46, 'MUJI/web_project/uploads/products/kem-chong-nang-1.jpg', 1);
+(46, 'MUJI/web_project/uploads/products/kem-chong-nang-1.jpg', 1);  

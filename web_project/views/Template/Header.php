@@ -57,7 +57,7 @@
                           <li><a class="dropdown-item" href="index.php?action=admin_dashboard">Quản trị</a></li>
                       <?php endif; ?>
                       <!-- <li><a class="dropdown-item" href="index.php?action=profile">Tài khoản của tôi</a></li> -->
-                      <!-- <li><a class="dropdown-item" href="index.php?action=my_orders">Đơn hàng của tôi</a></li> -->
+                      <li><a class="dropdown-item" href="index.php?action=my_orders">Đơn hàng của tôi</a></li>
                       <li><hr class="dropdown-divider"></li>
                       <li><a class="dropdown-item" href="index.php?action=logout">Đăng xuất</a></li>
                   </ul>
@@ -149,7 +149,6 @@
     </form>
     </div>
     <!-- Đoạn code giỏ hàng trong Header.php -->
-    <!-- Thay thế phần giỏ hàng hiện tại bằng code sau -->
     <div class="position-relative">
         <a href="index.php?action=cart" class="text-white d-flex align-items-center text-decoration-none">
             <i class="fas fa-shopping-cart fs-5 me-2"></i>
