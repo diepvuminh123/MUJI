@@ -454,6 +454,7 @@ $result = $conn->query($query);
   // MỞ RỘNG: Thêm chức năng tìm kiếm/lọc
 <!--JavaScript cho tự động ẩn cảnh báo thành công -->
 </script>
+<script>
   // Ẩn cảnh báo thành công sau 5 giây
   setTimeout(() => {
     const successAlert = document.getElementById('success-alert');

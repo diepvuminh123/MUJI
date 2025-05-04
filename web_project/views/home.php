@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Trang chủ MUJI</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+
   <script defer src="https://unpkg.com/flowbite@1.6.5/dist/flowbite.min.js"></script> <!-- Carousel JS (Flowbite) -->
 </head>
 

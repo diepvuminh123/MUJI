@@ -15,15 +15,14 @@
 <body class="bg-white font-sans text-sm text-gray-800">
 
 <!-- Header1  -->
-<div class=" bg-white" style="height: 60px;">
-  <div class="container mx-auto px-4 flex justify-between items-center" style="padding-top: 15px;">
+<div class=" bg-white" style="font-size: 20px;">
+  <div class="container mx-auto px-6 flex justify-between items-center" style="padding-top: 23px;">
     <!-- Thông báo -->
-    <div class="text-red-800 text-xl">
-    <?=
-    "Địa chỉ:".($GLOBALS['site_info']['address'] ?? 'Chưa có địa chỉ') . " | " ."".
-    "Hotline: " . ($GLOBALS['site_info']['hotline'] ?? 'Chưa có hotline'); ?>
-
-
+    
+    <div class="text-red-800 font-semibold" style="font-size: px;">
+        <span><i class="fas fa-map-marker-alt mr-1"></i> Địa chỉ: <?= $GLOBALS['site_info']['address'] ?? '152 Điện Biên Phủ' ?></span>
+        <span class="mx-2">|</span>
+        <span><i class="fas fa-phone-alt mr-1"></i> Hotline: <?= $GLOBALS['site_info']['hotline'] ?? '0915728661' ?></span>
     </div>
 
     <!-- Ngôn ngữ + Đăng nhập -->
@@ -79,11 +78,11 @@
 </div>
 
 <!-- Thanh navbar chính -->
-<div class="bg-red-800 text-white sticky top-0 z-50 ">
-  <div class=" w-3/4 mx-auto py-4 flex items-center justify-between">
+<div class="bg-red-800 text-white sticky top-0 z-50 mt-3">
+  <div class=" w-full; mx-auto py-4 flex items-center justify-between">
     
     <!-- Logo App -->
-    <div class="flex-shrink-0 pl-2 pr-5 ">
+    <div class="flex-shrink-0 ml-8 pl-12 pr-12 ">
       <h1 class="text-3xl font-bold leading-tight">
       <?="".($GLOBALS['site_info']['Company_name'] ?? 'Chưa có tên') ?>
         
@@ -92,62 +91,62 @@
     </div>
 
     <!--  Menu chính -->
-    <ul class="hidden md:flex space-x-5 font-semibold">
-      <li><a href="index.php?action=products" class="hover:underline text-2xl">Danh sách sản phẩm </a></li>
-      <li><a href="#" class="hover:underline text-2xl">Liên Hệ</a></li>
-      <li><a href="#" class="hover:underline text-2xl">Giới Thiệu</a></li>
-      <li><a href="#" class="hover:underline text-2xl">Hỏi Đáp</a></li>
-      <li><a href="#" class="hover:underline text-2xl ">Danh sách bài viết</a></li>
+    <ul class="hidden md:flex  font-semibold " style="gap:30px;">
+      <li><a href="index.php?action=products" class="hover:underline " style="font-size: 22px;">Danh sách sản phẩm </a></li>
+      <li><a href="#" class="hover:underline " style="font-size: 22px;">Liên Hệ</a></li>
+      <li><a href="#" class="hover:underline " style="font-size: 22px;">Giới Thiệu</a></li>
+      <li><a href="#" class="hover:underline " style="font-size: 22px;">Hỏi Đáp</a></li>
+      <li><a href="#" class="hover:underline " style="font-size: 22px;">Danh sách bài viết</a></li>
 
      
     </ul>
 
     <!-- Tìm kiếm & Giỏ hàng -->
-    <div class="flex items-center space-x-4 ">
+    <div class="flex items-center space-x-4 ml-auto">
       
       <!-- search -->
        
 
 
       <form class="mx-auto" style="width: 480px;" action="index.php" method="GET">
-      <input type="hidden" name="action" value="products">
-        
-      <label for="default-search" class="mb-2 pl-6 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+        <input type="hidden" name="action" value="products">
+          
+        <label for="default-search" class="mb-2 pl-6 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
 
-      <div class="relative">
-        <!-- Icon search -->
-        <div class="absolute inset-y-0 left-3 flex items-center pointer-events-none">
-          <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
-          </svg>
+        <div class="relative">
+          <!-- Icon search -->
+          <div class="absolute inset-y-0 left-3 flex items-center pointer-events-none">
+            <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+            </svg>
+          </div>
+
+          <!-- Input with padding left & right -->
+          <input
+            type="search"
+            id="default-search"
+            name="search"
+            class="block w-full p-4 pr-24 pl-10 text-lg text-gray-900 border border-gray-300 rounded-lg bg-gray-50
+                  focus:ring-blue-500 focus:border-blue-500
+                  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white
+                  dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  
+            placeholder="Tìm kiếm sản phẩm "
+            required
+          />
+
+          <!-- Button search -->
+          <button
+            type="submit"
+            class="absolute right-2.5 bottom-2.5 bg-gray-700 hover:bg-blue-800 text-white font-medium rounded-lg text-lg px-4 py-2
+                  focus:outline-none focus:ring-4 focus:ring-blue-300
+                  dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            Search
+          </button>
         </div>
-
-        <!-- Input with padding left & right -->
-        <input
-          type="search"
-          id="default-search"
-          name="search"
-          class="block w-full p-4 pr-24 pl-10 text-lg text-gray-900 border border-gray-300 rounded-lg bg-gray-50
-                focus:ring-blue-500 focus:border-blue-500
-                dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white
-                dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                
-          placeholder="Tìm kiếm sản phẩm "
-          required
-        />
-
-        <!-- Button search -->
-        <button
-          type="submit"
-          class="absolute right-2.5 bottom-2.5 bg-gray-700 hover:bg-blue-800 text-white font-medium rounded-lg text-lg px-4 py-2
-                focus:outline-none focus:ring-4 focus:ring-blue-300
-                dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-          Search
-        </button>
-      </div>
-    </form>
-    </div>
+     </form>
+  
     <!-- Đoạn code giỏ hàng trong Header.php -->
     <div class="position-relative">
         <a href="index.php?action=cart" class="text-white d-flex align-items-center text-decoration-none">
@@ -198,8 +197,8 @@
           </a>
       </div> -->
       <!-- Phần đăng nhập/đăng ký trong Header.php -->
-      <div class="flex items-center space-x-2 text-xl">
-          <span class="text-red-800">👤</span>
+      <div class="flex items-center space-x-2 text-xl pl-6">
+          
           <?php if (isset($_SESSION['user'])): ?>
               <div class="dropdown">
                   <a href="#" class="text-red-800 font-semibold hover:underline dropdown-toggle" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
@@ -223,7 +222,7 @@
       </div>
   </div>
 </div>
-
+</div>
       <main>
         <?php if (isset($_SESSION['success_message'])): ?>
             <div class="container mt-3">
