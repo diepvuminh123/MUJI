@@ -78,13 +78,13 @@ $GLOBALS['site_info'] = [
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dashboard - Mazer Admin Dashboard</title>
   <!-- CSS Stylesheets -->
-  <link rel="stylesheet" href="./assets/compiled/css/app.css">
-  <link rel="stylesheet" href="./assets/compiled/css/app-dark.css">
+  <link rel="stylesheet" href="/MUJI/web_project/views/admin/assets/compiled/css/app.css">
+  <link rel="stylesheet" href="/MUJI/web_project/views/admin/assets/compiled/css/app-dark.css">
   <!--font-->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./assets/compiled/css/admin.css">
+  <link rel="stylesheet" href="/MUJI/web_project/views/admin/assets/compiled/css/admin.css">
   <style>
     /* Hiệu ứng cho cảnh báo thành công */
     #success-alert {
@@ -451,12 +451,12 @@ $result = $conn->query($query);
 </script>
 
 <!-- Tệp JavaScript Cốt lõi -->
-<script src="assets/static/js/components/dark.js"></script>
-<script src="assets/extensions/perfect-scrollbar/perfect-scrollbar.min.js"></script>
-<script src="assets/compiled/js/app.js"></script>
+<script src="MUJI/web_project/views/admin/assets/static/js/components/dark.js"></script>
+<script src="MUJI/web_project/views/admin/assets/extensions/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+<script src="MUJI/web_project/views/admin/assets/compiled/js/app.js"></script>
 
 <!-- JavaScript Dành riêng cho Dashboard -->
-<script src="assets/extensions/apexcharts/apexcharts.min.js"></script>
-<script src="assets/static/js/pages/dashboard.js"></script>
+<script src="MUJI/web_project/views/admin/assets/extensions/apexcharts/apexcharts.min.js"></script>
+<script src="MUJI/web_project/views/admin/assets/static/js/pages/dashboard.js"></script>
 </body>
 </html>

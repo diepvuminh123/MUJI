@@ -84,7 +84,7 @@ class AuthController {
             // Chuyển hướng đến trang tương ứng với vai trò
             if ($user['role'] === 'admin') {
                 $_SESSION['success_message'] = 'Đăng nhập thành công! Chào mừng quản trị viên quay trở lại.';
-                header('Location: index.php?action=admin_dashboard');
+                header('Location: index.php?action=admin');
             } else {
                 $_SESSION['success_message'] = 'Đăng nhập thành công!';
                 header('Location: index.php');
