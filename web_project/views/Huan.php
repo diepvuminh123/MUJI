@@ -432,22 +432,7 @@ $category = isset($_GET['category']) ? $conn->real_escape_string($_GET['category
 </head> 
 <body>
     <!-- Header -->
-    <header class="header">
-        <div class="container">
-            <nav class="navbar">
-                <a href="home.php" class="logo">
-                    <i class="fas fa-newspaper"></i> Tin Tức
-                </a>
-                <ul class="menu">
-                    <li><a href="home.php"><i class="fas fa-home"></i> Trang chủ</a></li>
-                    <li><a href="?category=Gây Sốc"><i class="fas fa-bolt"></i> Tin nóng</a></li>
-                    <li><a href="?category=Xã Hội"><i class="fas fa-users"></i> Xã hội</a></li>
-                    <li><a href="?category=Giải Trí"><i class="fas fa-film"></i> Giải trí</a></li>
-                    <li><a href="?category=Thể Thao"><i class="fas fa-futbol"></i> Thể thao</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+    <?php include 'Template/Header.php'; ?>
 
     <!-- Main Content -->
     <main class="content">

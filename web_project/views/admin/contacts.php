@@ -5,6 +5,9 @@
  * Phần này xử lý việc hiển thị, trả lời và quản lý tin nhắn liên hệ
  * từ khách truy cập trang web.
  */
+
+ob_start();
+
 require_once __DIR__ . '/../../config/config.php';
 
 // Xử lý các hành động POST cho quản lý tin nhắn liên hệ
@@ -204,4 +207,6 @@ ob_start();
 <?php
 $content = ob_get_clean();
 require_once __DIR__ . '/admin_layout.php';
+ob_end_flush();
+
 ?>

@@ -145,5 +145,50 @@ class Product {
         
         return $products;
     }
+        // Sản phẩm nổi bật
+    public function getFeaturedProducts($limit = 8) {
+        $sql = "SELECT p.*, 
+            (SELECT image_path FROM product_images WHERE product_id = p.id AND is_primary = 1 LIMIT 1) AS primary_image
+            FROM products p
+            WHERE p.featured = 1 AND p.status = 'active'
+            ORDER BY p.created_at DESC
+            LIMIT ?";
+        
+        $stmt = $this->db->prepare($sql);
+        $stmt->bind_param("i", $limit);
+        $stmt->execute();
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    }
+
+    // Sản phẩm mới
+    public function getNewProducts($limit = 8) {
+        $sql = "SELECT p.*, 
+            (SELECT image_path FROM product_images WHERE product_id = p.id AND is_primary = 1 LIMIT 1) AS primary_image
+            FROM products p
+            WHERE p.status = 'active'
+            ORDER BY p.created_at DESC
+            LIMIT ?";
+        
+        $stmt = $this->db->prepare($sql);
+        $stmt->bind_param("i", $limit);
+        $stmt->execute();
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    }
+
+    // Sản phẩm bán chạy (giả sử nhiều hàng tồn là bán chạy)
+    public function getBestsellerProducts($limit = 8) {
+        $sql = "SELECT p.*, 
+            (SELECT image_path FROM product_images WHERE product_id = p.id AND is_primary = 1 LIMIT 1) AS primary_image
+            FROM products p
+            WHERE p.status = 'active'
+            ORDER BY quantity DESC
+            LIMIT ?";
+        
+        $stmt = $this->db->prepare($sql);
+        $stmt->bind_param("i", $limit);
+        $stmt->execute();
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    }
+
 }
 ?>
