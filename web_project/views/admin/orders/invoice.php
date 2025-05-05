@@ -105,7 +105,7 @@ $page_title = 'Hóa đơn #' . $data['order']['order_code'];
         <div class="invoice-header">
             <div class="row">
                 <div class="col-md-6">
-                    <div class="fw-bold fs-4 mb-1"><?php echo $GLOBALS['site_info']['Company_name'] ?? 'MUJI Store'; ?></div>
+                    <div class="fw-bold fs-4 mb-1"><?php echo $GLOBALS['site_info']['Company_name'] ?? 'SAKURA Store'; ?></div>
                     <div class="text-muted small"><?php echo $GLOBALS['site_info']['Slogan'] ?? 'Hàng Nhật chính hãng'; ?></div>
                     <div class="text-muted small mt-2"><?php echo $GLOBALS['site_info']['address'] ?? '123 Đường ABC, Quận XYZ, Thành phố Hồ Chí Minh'; ?></div>
                     <div class="text-muted small">Hotline: <?php echo $GLOBALS['site_info']['hotline'] ?? '0123 456 789'; ?></div>
@@ -243,7 +243,7 @@ $page_title = 'Hóa đơn #' . $data['order']['order_code'];
         
         <!-- Invoice Footer -->
         <div class="invoice-footer text-center">
-            <p class="mb-1">Cảm ơn bạn đã mua hàng tại <?php echo $GLOBALS['site_info']['Company_name'] ?? 'MUJI Store'; ?>!</p>
+            <p class="mb-1">Cảm ơn bạn đã mua hàng tại <?php echo $GLOBALS['site_info']['Company_name'] ?? 'SAKURA Store'; ?>!</p>
             <p class="mb-0 small">Nếu có bất kỳ thắc mắc nào về đơn hàng, vui lòng liên hệ Hotline: <?php echo $GLOBALS['site_info']['hotline'] ?? '0123 456 789'; ?></p>
         </div>
     </div>
