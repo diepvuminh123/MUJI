@@ -34,7 +34,9 @@ switch ($action) {
     case 'qa':
         require_once '../views/qa.php';
         break;  
-    
+    case 'listartical':
+        require_once '../views/listartical.php';
+        break; 
 
     case 'admin':
         require_once '../views/admin/admin.php';

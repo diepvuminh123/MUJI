@@ -48,9 +48,6 @@ ob_start(); // bắt đầu nội dung trang
           <input type="text" name="category" class="form-control" placeholder="Chuyên mục">
         </div>
         <div class="form-group mb-3">
-          <input type="text" name="image" class="form-control" placeholder="URL hình ảnh (https://...)">
-        </div>
-        <div class="form-group mb-3">
           <textarea name="content" class="form-control" rows="4" placeholder="Nội dung bài viết"></textarea>
         </div>
         <button type="submit" class="btn btn-primary">Thêm bài viết</button>
