@@ -284,7 +284,7 @@
       <div class="max-w-7xl mx-auto px-4">
         <div class="flex flex-col md:flex-row items-center gap-8">
           <div class="w-full md:w-1/2">
-            <img src="/uploads/Gray.jpg" alt="Khuyến mãi" class="w-full h-80 object-cover rounded-lg shadow-lg">
+            <img src="../uploads/Khuyenmai.jpg" alt="Khuyến mãi" class="w-full h-80 object-cover rounded-lg shadow-lg">
           </div>
           <div class="w-full md:w-1/2 text-center md:text-left">
             <h2 class="text-xl font-semibold mb-2 text-red-800">KHUYẾN MÃI ĐẶC BIỆT</h2>
@@ -479,13 +479,13 @@
     <div class="bg-white py-12">
       <div class="max-w-7xl mx-auto px-4">
         <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-8 text-center relative pb-3 inline-block">
-          Danh mục sản phẩm
+          Danh mục sản phẩm phổ biến
           <span class="absolute bottom-0 left-0 w-full h-1 bg-red-800"></span>
         </h2>
         
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
           <!-- Danh mục mẫu -->
-          <a href="index.php?action=products&category=ao" class="group">
+          <a href="index.php?action=products&category=8" class="group">
             <div class="bg-gray-100 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition duration-300 text-center p-4">
               <div class="w-20 h-20 mx-auto mb-3 bg-white rounded-full flex items-center justify-center">
                 <i class="fas fa-tshirt text-red-800 text-2xl"></i>
@@ -493,7 +493,7 @@
               <h3 class="text-lg font-medium text-gray-800 group-hover:text-red-800 transition">Áo</h3>
             </div>
           </a>
-          <a href="index.php?action=products&category=quan" class="group">
+          <a href="index.php?action=products&category=9" class="group">
             <div class="bg-gray-100 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition duration-300 text-center p-4">
               <div class="w-20 h-20 mx-auto mb-3 bg-white rounded-full flex items-center justify-center">
                 <i class="fas fa-socks text-red-800 text-2xl"></i>
@@ -501,20 +501,20 @@
               <h3 class="text-lg font-medium text-gray-800 group-hover:text-red-800 transition">Quần</h3>
             </div>
           </a>
-          <a href="index.php?action=products&category=phu-kien" class="group">
+          <a href="index.php?action=products&category=13" class="group">
             <div class="bg-gray-100 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition duration-300 text-center p-4">
               <div class="w-20 h-20 mx-auto mb-3 bg-white rounded-full flex items-center justify-center">
                 <i class="fas fa-hat-wizard text-red-800 text-2xl"></i>
               </div>
-              <h3 class="text-lg font-medium text-gray-800 group-hover:text-red-800 transition">Phụ kiện</h3>
+              <h3 class="text-lg font-medium text-gray-800 group-hover:text-red-800 transition">Phụ kiện nữ</h3>
             </div>
           </a>
-          <a href="index.php?action=products&category=do-dung" class="group">
+          <a href="index.php?action=products&category=15" class="group">
             <div class="bg-gray-100 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition duration-300 text-center p-4">
               <div class="w-20 h-20 mx-auto mb-3 bg-white rounded-full flex items-center justify-center">
                 <i class="fas fa-home text-red-800 text-2xl"></i>
               </div>
-              <h3 class="text-lg font-medium text-gray-800 group-hover:text-red-800 transition">Đồ dùng</h3>
+              <h3 class="text-lg font-medium text-gray-800 group-hover:text-red-800 transition">Laptop </h3>
             </div>
           </a>
         </div>
