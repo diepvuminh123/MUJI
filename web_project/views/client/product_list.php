@@ -39,20 +39,42 @@ include  __DIR__ . '/../Template/Header.php';
         <!-- Product listing -->
         <div class="col-lg-9">
             <!-- Search bar -->
+            <!-- Thêm bộ lọc dưới thanh search hiện tại -->
             <div class="card mb-4">
                 <div class="card-body">
-                    <form action="index.php" method="GET" class="d-flex">
+                    <form action="index.php" method="GET" class="d-flex flex-column">
                         <input type="hidden" name="action" value="products">
                         <?php if (!empty($category)): ?>
                             <input type="hidden" name="category" value="<?php echo $category; ?>">
                         <?php endif; ?>
+                        <?php if (!empty($search)): ?>
+                            <input type="hidden" name="search" value="<?php echo htmlspecialchars($search); ?>">
+                        <?php endif; ?>
                         
-                        <input type="text" name="search" class="form-control me-2" 
-                               placeholder="Tìm kiếm sản phẩm..." 
-                               value="<?php echo htmlspecialchars($search ?? ''); ?>">
-                        <button type="submit" class="btn btn-primary">
-                            <i class="fas fa-search"></i> Tìm kiếm
-                        </button>
+                        <div class="row mb-3">
+                            <div class="col-md-5">
+                                <label for="sort" class="form-label">Sắp xếp theo:</label>
+                                <select name="sort" id="sort" class="form-select">
+                                    <option value="">Mặc định</option>
+                                    <option value="price_asc" <?php echo (isset($_GET['sort']) && $_GET['sort'] == 'price_asc') ? 'selected' : ''; ?>>Giá: Thấp đến cao</option>
+                                    <option value="price_desc" <?php echo (isset($_GET['sort']) && $_GET['sort'] == 'price_desc') ? 'selected' : ''; ?>>Giá: Cao đến thấp</option>
+                                    <option value="name_asc" <?php echo (isset($_GET['sort']) && $_GET['sort'] == 'name_asc') ? 'selected' : ''; ?>>Tên: A đến Z</option>
+                                    <option value="name_desc" <?php echo (isset($_GET['sort']) && $_GET['sort'] == 'name_desc') ? 'selected' : ''; ?>>Tên: Z đến A</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="sale" class="form-label">Trạng thái:</label>
+                                <select name="sale" id="sale" class="form-select">
+                                    <option value="">Tất cả sản phẩm</option>
+                                    <option value="1" <?php echo (isset($_GET['sale']) && $_GET['sale'] == '1') ? 'selected' : ''; ?>>Sản phẩm đang giảm giá</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3 d-flex align-items-end">
+                                <button type="submit" class="btn btn-primary w-100">
+                                    <i class="fas fa-filter"></i> Lọc
+                                </button>
+                            </div>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -107,14 +129,18 @@ include  __DIR__ . '/../Template/Header.php';
                     <?php endforeach; ?>
                 <?php endif; ?>
             </div>
-            
+
             <!-- Pagination -->
             <?php if (isset($totalPages) && $totalPages > 1): ?>
                 <nav class="mt-4">
                     <ul class="pagination justify-content-center">
                         <?php for ($i = 1; $i <= $totalPages; $i++): ?>
-                            <li class="page-item <?php echo ($i == ($currentPage ?? 1)) ? 'active' : ''; ?>">
-                                <a class="page-link" href="index.php?action=products&page=<?php echo $i; ?><?php echo !empty($category) ? '&category='.$category : ''; ?><?php echo !empty($search) ? '&search='.$search : ''; ?>">
+                            <li class="page-item <?php echo ($i == $currentPage) ? 'active' : ''; ?>">
+                                <a class="page-link" href="index.php?action=products&page=<?php echo $i; ?>
+                                    <?php echo !empty($category) ? '&category='.$category : ''; ?>
+                                    <?php echo !empty($search) ? '&search='.urlencode($search) : ''; ?>
+                                    <?php echo isset($_GET['sort']) ? '&sort='.$_GET['sort'] : ''; ?>
+                                    <?php echo isset($_GET['sale']) ? '&sale='.$_GET['sale'] : ''; ?>">
                                     <?php echo $i; ?>
                                 </a>
                             </li>

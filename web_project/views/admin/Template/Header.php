@@ -173,7 +173,7 @@ if (isset($conn) && $conn) {
                 <i class="bi bi-cart"></i>
                 <span>Quản lý giỏ hàng</span>
               </a>
-            </li>
+            </li> 
         </ul>
       </div>
     </div>

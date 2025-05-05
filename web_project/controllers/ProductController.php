@@ -23,13 +23,15 @@ class ProductController {
         $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
         $category = isset($_GET['category']) ? $_GET['category'] : null;
         $search = isset($_GET['search']) ? $_GET['search'] : null;
+        $sort = isset($_GET['sort']) ? $_GET['sort'] : null;
+        $sale = isset($_GET['sale']) ? $_GET['sale'] : null;
         
         // Validate page number
         if ($page < 1) $page = 1;
         
-        // Get products with pagination
-        $products = $this->productModel->getAllProducts($page, 12, $category, $search);
-        $totalProducts = $this->productModel->countProducts($category, $search);
+        // Get products with pagination, search and filters
+        $products = $this->productModel->getAllProducts($page, 12, $category, $search, $sort, $sale);
+        $totalProducts = $this->productModel->countProducts($category, $search, $sale);
         $totalPages = ceil($totalProducts / 12); // 12 products per page
         
         // Get categories for sidebar
@@ -42,7 +44,9 @@ class ProductController {
             'currentPage' => $page,
             'totalPages' => $totalPages,
             'category' => $category,
-            'search' => $search
+            'search' => $search,
+            'sort' => $sort,
+            'sale' => $sale
         ];
         
         // Load view

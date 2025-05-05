@@ -6,40 +6,85 @@ class Product {
         $this->db = $db;
     }
     
-    // Get products with pagination
-    public function getAllProducts($page = 1, $limit = 12, $category = null, $search = null) {
+    // Trong file Product.php
+    public function getAllProducts($page = 1, $limit = 12, $category = null, $search = null, $sort = null, $sale = null, $price_min = null, $price_max = null) {
         require_once __DIR__ . '/../config/config.php';
         
         $offset = ($page - 1) * $limit;
         
+        // Sử dụng subquery để xác định giá hiển thị (sale_price hoặc price)
         $sql = "SELECT p.*, c.name as category_name, 
-                (SELECT image_path FROM product_images WHERE product_id = p.id AND is_primary = 1 LIMIT 1) as primary_image 
+                (SELECT image_path FROM product_images WHERE product_id = p.id AND is_primary = 1 LIMIT 1) as primary_image,
+                IF(p.sale_price IS NOT NULL AND p.sale_price > 0 AND p.sale_price < p.price, p.sale_price, p.price) as display_price
                 FROM products p 
                 LEFT JOIN categories c ON p.category_id = c.id 
                 WHERE p.status = 'active'";
         
+        $params = [];
+        $types = "";
+        
+        // Xử lý các tham số lọc
         if ($category) {
             $sql .= " AND p.category_id = ?";
+            $params[] = $category;
+            $types .= "i";
         }
         
         if ($search) {
             $sql .= " AND (p.name LIKE ? OR p.description LIKE ?)";
+            $searchParam = "%$search%";
+            $params[] = $searchParam;
+            $params[] = $searchParam;
+            $types .= "ss";
         }
         
-        $sql .= " ORDER BY p.created_at DESC LIMIT ?, ?";
+        if ($sale == '1') {
+            $sql .= " AND p.sale_price IS NOT NULL AND p.sale_price > 0 AND p.sale_price < p.price";
+        }
+        
+        // Thêm lọc theo khoảng giá
+        if ($price_min !== null && is_numeric($price_min)) {
+            $sql .= " AND IF(p.sale_price IS NOT NULL AND p.sale_price > 0 AND p.sale_price < p.price, p.sale_price, p.price) >= ?";
+            $params[] = $price_min;
+            $types .= "d";
+        }
+        
+        if ($price_max !== null && is_numeric($price_max)) {
+            $sql .= " AND IF(p.sale_price IS NOT NULL AND p.sale_price > 0 AND p.sale_price < p.price, p.sale_price, p.price) <= ?";
+            $params[] = $price_max;
+            $types .= "d";
+        }
+        
+        // Xử lý sắp xếp
+        switch ($sort) {
+            case 'price_asc':
+                $sql .= " ORDER BY display_price ASC";
+                break;
+            case 'price_desc':
+                $sql .= " ORDER BY display_price DESC";
+                break;
+            case 'name_asc':
+                $sql .= " ORDER BY p.name ASC";
+                break;
+            case 'name_desc':
+                $sql .= " ORDER BY p.name DESC";
+                break;
+            case 'newest':
+                $sql .= " ORDER BY p.created_at DESC";
+                break;
+            default:
+                $sql .= " ORDER BY p.created_at DESC";
+        }
+        
+        $sql .= " LIMIT ?, ?";
+        $params[] = $offset;
+        $params[] = $limit;
+        $types .= "ii";
         
         $stmt = $this->db->prepare($sql);
         
-        if ($category && $search) {
-            $searchParam = "%$search%";
-            $stmt->bind_param("isii", $category, $searchParam, $searchParam, $offset, $limit);
-        } elseif ($category) {
-            $stmt->bind_param("iii", $category, $offset, $limit);
-        } elseif ($search) {
-            $searchParam = "%$search%";
-            $stmt->bind_param("ssii", $searchParam, $searchParam, $offset, $limit);
-        } else {
-            $stmt->bind_param("ii", $offset, $limit);
+        if (!empty($params)) {
+            $stmt->bind_param($types, ...$params);
         }
         
         $stmt->execute();
@@ -53,30 +98,49 @@ class Product {
         return $products;
     }
     
-    // Count total products
-    public function countProducts($category = null, $search = null) {
+    public function countProducts($category = null, $search = null, $sale = null, $price_min = null, $price_max = null) {
         require_once __DIR__ . '/../config/config.php';
         
-        $sql = "SELECT COUNT(*) as total FROM products WHERE status = 'active'";
+        $sql = "SELECT COUNT(*) as total FROM products p WHERE p.status = 'active'";
+        
+        $params = [];
+        $types = "";
         
         if ($category) {
-            $sql .= " AND category_id = ?";
+            $sql .= " AND p.category_id = ?";
+            $params[] = $category;
+            $types .= "i";
         }
         
         if ($search) {
-            $sql .= " AND (name LIKE ? OR description LIKE ?)";
+            $sql .= " AND (p.name LIKE ? OR p.description LIKE ?)";
+            $searchParam = "%$search%";
+            $params[] = $searchParam;
+            $params[] = $searchParam;
+            $types .= "ss";
+        }
+        
+        if ($sale == '1') {
+            $sql .= " AND p.sale_price IS NOT NULL AND p.sale_price > 0 AND p.sale_price < p.price";
+        }
+        
+        // Thêm lọc theo khoảng giá
+        if ($price_min !== null && is_numeric($price_min)) {
+            $sql .= " AND IF(p.sale_price IS NOT NULL AND p.sale_price > 0 AND p.sale_price < p.price, p.sale_price, p.price) >= ?";
+            $params[] = $price_min;
+            $types .= "d";
+        }
+        
+        if ($price_max !== null && is_numeric($price_max)) {
+            $sql .= " AND IF(p.sale_price IS NOT NULL AND p.sale_price > 0 AND p.sale_price < p.price, p.sale_price, p.price) <= ?";
+            $params[] = $price_max;
+            $types .= "d";
         }
         
         $stmt = $this->db->prepare($sql);
         
-        if ($category && $search) {
-            $searchParam = "%$search%";
-            $stmt->bind_param("iss", $category, $searchParam, $searchParam);
-        } elseif ($category) {
-            $stmt->bind_param("i", $category);
-        } elseif ($search) {
-            $searchParam = "%$search%";
-            $stmt->bind_param("ss", $searchParam, $searchParam);
+        if (!empty($params)) {
+            $stmt->bind_param($types, ...$params);
         }
         
         $stmt->execute();
