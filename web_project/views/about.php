@@ -65,7 +65,7 @@ while ($row = $result->fetch_assoc()) {
     <section class="hero-section flex items-center justify-center relative">
         <div class="text-center text-white z-10 px-4">
             <h1 class="text-5xl md:text-6xl font-bold mb-4"><?= htmlspecialchars($data['Company_name'] ?? 'Công ty chúng tôi') ?></h1>
-            <p class="text-2xl md:text-3xl italic mb-8">"<?= htmlspecialchars($data['Slogan'] ?? 'Slogan công ty') ?>"</p>
+            <p class="text-2xl md:text-3xl italic mb-8">"<?= htmlspecialchars($GLOBALS['site_info']['Slogan '] ?? 'Slogan công ty') ?>"</p>
             <a href="#about" class="bg-white text-blue-600 hover:bg-blue-700 hover:text-white px-8 py-3 rounded-full font-bold transition duration-300 inline-block">Tìm hiểu thêm</a>
         </div>
         <div class="absolute bottom-10 w-full text-center text-white">
@@ -219,7 +219,7 @@ while ($row = $result->fetch_assoc()) {
                             </div>
                             <div>
                                 <h3 class="text-xl font-semibold mb-2">Email</h3>
-                                <p class="text-gray-600">info@<?= strtolower(str_replace(' ', '', $data['Company_name'] ?? 'company')) ?>.com</p>
+                                <p class="text-gray-600"><?= $GLOBALS['site_info']['email']?>.com</p>
                             </div>
                         </div>
                     </div>

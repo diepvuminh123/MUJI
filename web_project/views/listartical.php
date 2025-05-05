@@ -149,13 +149,11 @@ $category = isset($_GET['category']) ? $conn->real_escape_string($_GET['category
             border-radius: 10px;
             box-shadow: var(--shadow);
             margin-bottom: 30px;
+            font-size: 18px; /* Increased font size for article detail */
         }
+        /* Hiding images in article detail */
         .article-detail img {
-            width: 100%;
-            max-height: 500px;
-            object-fit: cover;
-            border-radius: 10px;
-            margin: 20px 0;
+            display: none;
         }
         .back-btn {
             display: inline-block;
@@ -168,6 +166,119 @@ $category = isset($_GET['category']) ? $conn->real_escape_string($_GET['category
         .back-btn:hover {
             background: #34495e;
         }
+        
+        /* Comment Section Styles */
+        .comment-section {
+            margin-top: 40px;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: var(--shadow);
+            margin-bottom: 20px;
+        }
+        .comment-section h3 {
+            font-size: 22px;
+            margin-bottom: 20px;
+            color: var(--primary);
+            position: relative;
+            padding-bottom: 10px;
+        }
+        .comment-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--secondary);
+        }
+        .comment-form input,
+        .comment-form textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            font-family: inherit;
+        }
+        .comment-form textarea {
+            height: 100px;
+            resize: vertical;
+        }
+        .comment-form button {
+            background: var(--secondary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: inherit;
+        }
+        .comment-form button:hover {
+            background: #2980b9;
+        }
+        .comment {
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+        .comment-author {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+        .comment-author strong {
+            color: var(--dark);
+        }
+        .comment-time {
+            font-size: 12px;
+            color: var(--gray);
+        }
+        .comment-text {
+            margin: 0;
+            color: #444;
+        }
+        .comment-actions {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 10px;
+        }
+        .like-button,
+        .reply-button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+        .like-button {
+            color: var(--gray);
+            margin-right: 15px;
+        }
+        .like-button.active {
+            color: var(--accent);
+        }
+        .reply-button {
+            color: var(--gray);
+        }
+        .replies-container {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+        .reply {
+            background: #f1f1f1;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+        .reply-form-container {
+            margin-top: 10px;
+            margin-left: 20px;
+        }
+        
         @media (max-width: 768px) {
             .articles-grid { grid-template-columns: 1fr; }
         }
@@ -209,7 +320,7 @@ $category = isset($_GET['category']) ? $conn->real_escape_string($_GET['category
             ?>
                 <div class="article-card">
                     <div class="article-image">
-                    <img src="../uploads/hot.jpg ?>" alt="<?= htmlspecialchars($row['title']) ?>">
+                        <img src="../uploads/hot.jpg" alt="<?= htmlspecialchars($row['title']) ?>">
                     </div>
                     <div class="article-content">
                         <h3 class="article-title"><?= htmlspecialchars($row['title']) ?></h3>
@@ -238,17 +349,312 @@ $category = isset($_GET['category']) ? $conn->real_escape_string($_GET['category
             <a href="index.php?action=listartical" class="back-btn">← Quay lại</a>
         <?php else: ?>
             <div class="article-detail">
-                <h1><?= htmlspecialchars($article['title']) ?></h1>
-                <div style="color: gray; margin-bottom: 10px;">
+                <h1 style="font-size: 32px; margin-bottom: 15px; color: var(--primary);"><?= htmlspecialchars($article['title']) ?></h1>
+                <div style="color: gray; margin-bottom: 20px; font-size: 16px;">
                     <i class="fas fa-user"></i> <?= htmlspecialchars($article['author']) ?> |
                     <i class="fas fa-calendar"></i> <?= $article['date'] ?> |
                     <i class="fas fa-tags"></i> <?= $article['category'] ?> |
                     <i class="fas fa-eye"></i> <?= $article['views'] + 1 ?>
                 </div>
-                <img src="<?= $article['image'] ?>" alt="<?= htmlspecialchars($article['title']) ?>">
-                <div style="margin-top: 20px; font-size: 16px;"><?= nl2br($article['content']) ?></div>
+                <!-- Image removed as requested -->
+                <div style="margin-top: 25px; font-size: 18px; line-height: 1.8;"><?= nl2br($article['content']) ?></div>
+                
+                <!-- Comment Section Start -->
+                <div class="comment-section">
+                    <h3>Bình luận <span id="comment-count" style="display: inline-block; background: var(--secondary); color: white; font-size: 14px; padding: 2px 8px; border-radius: 10px; margin-left: 10px; font-weight: normal;">0</span></h3>
+                    
+                    <!-- Sort Options -->
+                    <div style="display: flex; justify-content: flex-end; margin-bottom: 15px;">
+                        <select id="comment-sort" style="padding: 5px 10px; border: 1px solid #ddd; border-radius: 4px; background: white; color: var(--dark);">
+                            <option value="newest">Mới nhất</option>
+                            <option value="oldest">Cũ nhất</option>
+                            <option value="popular">Phổ biến nhất</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Comment Form -->
+                    <div class="comment-form" style="margin-bottom: 30px;">
+                        <input type="text" id="comment-name" placeholder="Tên của bạn">
+                        <textarea id="comment-content" placeholder="Nhập bình luận của bạn..."></textarea>
+                        <button id="submit-comment">Gửi bình luận</button>
+                    </div>
+                    
+                    <!-- Comments List -->
+                    <div id="comments-container"></div>
+                </div>
+                <!-- Comment Section End -->
+                
                 <a href="index.php?action=listartical<?= $category ? '&category='.urlencode($category) : '' ?>" class="back-btn" style="margin-top: 20px;">← Quay lại danh sách</a>
             </div>
+            
+            <!-- JavaScript for Comments -->
+            <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                // Get article ID
+                const articleId = <?= $id ?>;
+                const commentForm = document.querySelector('.comment-form');
+                const commentsContainer = document.getElementById('comments-container');
+                const nameInput = document.getElementById('comment-name');
+                const contentInput = document.getElementById('comment-content');
+                const submitButton = document.getElementById('submit-comment');
+                const commentCountElement = document.getElementById('comment-count');
+                
+                // Load comments from localStorage
+                function loadComments() {
+                    const storageKey = `article_${articleId}_comments`;
+                    let comments = JSON.parse(localStorage.getItem(storageKey)) || [];
+                    displayComments(comments);
+                    return comments;
+                }
+                
+                // Save comments to localStorage
+                function saveComments(comments) {
+                    const storageKey = `article_${articleId}_comments`;
+                    localStorage.setItem(storageKey, JSON.stringify(comments));
+                }
+                
+                // Display comments in the UI
+                function displayComments(comments) {
+                    commentsContainer.innerHTML = '';
+                    
+                    if (comments.length === 0) {
+                        commentsContainer.innerHTML = '<p style="color: var(--gray); text-align: center;">Chưa có bình luận nào. Hãy là người đầu tiên bình luận!</p>';
+                        return;
+                    }
+                    
+                    comments.forEach((comment, index) => {
+                        const commentEl = document.createElement('div');
+                        commentEl.className = 'comment';
+                        
+                        const date = new Date(comment.timestamp);
+                        const formattedDate = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()} ${date.getHours()}:${date.getMinutes().toString().padStart(2, '0')}`;
+                        
+                        commentEl.innerHTML = `
+                            <div class="comment-author">
+                                <strong>${escapeHTML(comment.name)}</strong>
+                                <span class="comment-time">${formattedDate}</span>
+                            </div>
+                            <p class="comment-text">${escapeHTML(comment.content)}</p>
+                            <div class="comment-actions">
+                                <button class="like-button ${comment.liked ? 'active' : ''}" data-index="${index}">
+                                    <i class="fas fa-heart" style="margin-right: 5px;"></i>
+                                    <span class="like-count">${comment.likes || 0}</span>
+                                </button>
+                                <button class="reply-button" data-index="${index}">
+                                    <i class="fas fa-reply" style="margin-right: 5px;"></i> Trả lời
+                                </button>
+                            </div>
+                            <div class="replies-container">
+                                ${displayReplies(comment.replies || [])}
+                            </div>
+                            <div class="reply-form-container" data-index="${index}" style="display: none;"></div>
+                        `;
+                        
+                        commentsContainer.appendChild(commentEl);
+                    });
+                    
+                    // Add event listeners for like buttons
+                    document.querySelectorAll('.like-button').forEach(button => {
+                        button.addEventListener('click', function() {
+                            const index = parseInt(this.getAttribute('data-index'));
+                            const comments = loadComments();
+                            
+                            if (!comments[index].liked) {
+                                comments[index].likes = (comments[index].likes || 0) + 1;
+                                comments[index].liked = true;
+                                this.classList.add('active');
+                            } else {
+                                comments[index].likes = Math.max(0, (comments[index].likes || 0) - 1);
+                                comments[index].liked = false;
+                                this.classList.remove('active');
+                            }
+                            
+                            saveComments(comments);
+                            this.querySelector('.like-count').textContent = comments[index].likes;
+                        });
+                    });
+                    
+                    // Add event listeners for reply buttons
+                    document.querySelectorAll('.reply-button').forEach(button => {
+                        button.addEventListener('click', function() {
+                            const index = parseInt(this.getAttribute('data-index'));
+                            const replyContainer = document.querySelector(`.reply-form-container[data-index="${index}"]`);
+                            
+                            // Toggle reply form
+                            if (replyContainer.style.display === 'none') {
+                                replyContainer.style.display = 'block';
+                                replyContainer.innerHTML = `
+                                    <div style="margin-bottom: 10px;">
+                                        <input type="text" class="reply-name" placeholder="Tên của bạn" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; margin-bottom: 8px;">
+                                        <textarea class="reply-content" placeholder="Nhập trả lời của bạn..." style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; height: 80px;"></textarea>
+                                    </div>
+                                    <button class="submit-reply" data-index="${index}" style="background: var(--secondary); color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; font-size: 13px;">Gửi trả lời</button>
+                                `;
+                                
+                                // Auto-fill the name if available
+                                const rememberedName = localStorage.getItem('remembered_comment_name');
+                                if (rememberedName) {
+                                    replyContainer.querySelector('.reply-name').value = rememberedName;
+                                }
+                                
+                                // Add event listener for reply submission
+                                replyContainer.querySelector('.submit-reply').addEventListener('click', function() {
+                                    const replyIndex = parseInt(this.getAttribute('data-index'));
+                                    const replyName = replyContainer.querySelector('.reply-name').value.trim();
+                                    const replyContent = replyContainer.querySelector('.reply-content').value.trim();
+                                    
+                                    if (replyName && replyContent) {
+                                        const comments = loadComments();
+                                        
+                                        if (!comments[replyIndex].replies) {
+                                            comments[replyIndex].replies = [];
+                                        }
+                                        
+                                        comments[replyIndex].replies.push({
+                                            name: replyName,
+                                            content: replyContent,
+                                            timestamp: new Date().getTime()
+                                        });
+                                        
+                                        // Save the name for future use
+                                        localStorage.setItem('remembered_comment_name', replyName);
+                                        
+                                        saveComments(comments);
+                                        displayComments(comments);
+                                        updateCommentCount();
+                                    }
+                                });
+                            } else {
+                                replyContainer.style.display = 'none';
+                                replyContainer.innerHTML = '';
+                            }
+                        });
+                    });
+                }
+                
+                // Helper function to display replies
+                function displayReplies(replies) {
+                    if (replies.length === 0) return '';
+                    
+                    let repliesHTML = '';
+                    
+                    replies.forEach((reply, index) => {
+                        const date = new Date(reply.timestamp);
+                        const formattedDate = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()} ${date.getHours()}:${date.getMinutes().toString().padStart(2, '0')}`;
+                        
+                        repliesHTML += `
+                            <div class="reply">
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                                    <strong style="color: var(--dark); font-size: 14px;">${escapeHTML(reply.name)}</strong>
+                                    <span style="font-size: 11px; color: var(--gray);">${formattedDate}</span>
+                                </div>
+                                <p style="margin: 0; color: #444; font-size: 14px;">${escapeHTML(reply.content)}</p>
+                            </div>
+                        `;
+                    });
+                    
+                    return repliesHTML;
+                }
+                
+                // Helper function to escape HTML
+                function escapeHTML(str) {
+                    const div = document.createElement('div');
+                    div.textContent = str;
+                    return div.innerHTML;
+                }
+                
+                // Update comment count badge
+                function updateCommentCount() {
+                    const comments = loadComments();
+                    let totalComments = comments.length;
+                    
+                    // Count replies as well
+                    comments.forEach(comment => {
+                        if (comment.replies) {
+                            totalComments += comment.replies.length;
+                        }
+                    });
+                    
+                    commentCountElement.textContent = totalComments;
+                }
+                
+                // Submit comment event listener
+                submitButton.addEventListener('click', function() {
+                    const name = nameInput.value.trim();
+                    const content = contentInput.value.trim();
+                    
+                    if (name && content) {
+                        const comments = loadComments();
+                        
+                        comments.push({
+                            name: name,
+                            content: content,
+                            timestamp: new Date().getTime(),
+                            likes: 0,
+                            replies: []
+                        });
+                        
+                        // Save the name for future use
+                        localStorage.setItem('remembered_comment_name', name);
+                        
+                        saveComments(comments);
+                        displayComments(comments);
+                        updateCommentCount();
+                        
+                        // Clear inputs
+                        nameInput.value = name; // Keep the name for convenience
+                        contentInput.value = '';
+                    } else {
+                        // Show error message if fields are empty
+                        if (!name) {
+                            nameInput.style.borderColor = 'var(--accent)';
+                            nameInput.addEventListener('input', function() {
+                                this.style.borderColor = '';
+                            }, { once: true });
+                        }
+                        if (!content) {
+                            contentInput.style.borderColor = 'var(--accent)';
+                            contentInput.addEventListener('input', function() {
+                                this.style.borderColor = '';
+                            }, { once: true });
+                        }
+                    }
+                });
+                
+                // Add sorting functionality
+                document.getElementById('comment-sort').addEventListener('change', function() {
+                    const sortType = this.value;
+                    const comments = loadComments();
+                    
+                    if (sortType === 'newest') {
+                        comments.sort((a, b) => b.timestamp - a.timestamp);
+                    } else if (sortType === 'oldest') {
+                        comments.sort((a, b) => a.timestamp - b.timestamp);
+                    } else if (sortType === 'popular') {
+                        comments.sort((a, b) => (b.likes || 0) - (a.likes || 0));
+                    }
+                    
+                    displayComments(comments);
+                });
+                
+                // Remember user's name for convenience
+                const rememberedName = localStorage.getItem('remembered_comment_name');
+                if (rememberedName) {
+                    nameInput.value = rememberedName;
+                }
+                
+                // Initialize
+                loadComments();
+                updateCommentCount();
+                
+                // Add enter key support for submitting comments
+                contentInput.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter' && e.ctrlKey) {
+                        submitButton.click();
+                    }
+                });
+            });
+            </script>
         <?php endif; ?>
     <?php endif; ?>
 </div>

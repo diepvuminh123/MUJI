@@ -382,7 +382,7 @@
       <div class="max-w-7xl mx-auto px-4">
         <div class="flex flex-col md:flex-row items-center gap-8">
           <div class="w-full md:w-2/3">
-            <img src="/uploads/Gray.jpg" alt="Bộ sưu tập Xuân Hè" class="w-full rounded-lg shadow-lg">
+            <img src="/MUJI/web_project/uploads/summer.png" alt="Bộ sưu tập Xuân Hè" class="w-full rounded-lg shadow-lg">
           </div>
           <div class="w-full md:w-1/3 text-center md:text-left">
             <h2 class="text-xl font-semibold mb-2 text-red-800">BỘ SƯU TẬP</h2>

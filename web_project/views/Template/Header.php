@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <!-- <title>Home</title> -->
   <title><?php echo $page_title ?? 'Home'; ?></title>
+  <link rel="icon" type="image/png" href="/MUJI/web_project/uploads/LOGO.png" />
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />   <!-- Tailwind CSS CDN -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" /> <!-- Font Awesome CDN -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" /> <!-- Font Awesome CDN -->
@@ -83,12 +84,15 @@
   <div class=" w-full; mx-auto py-4 flex items-center justify-between">
     
     <!-- Logo App -->
-    <div class="flex-shrink-0 ml-8 pl-12 pr-12 ">
+    <div class="flex-shrink-0 ml-8 pl-12 pr-12 cursor-pointer">
+      <a href="index.php?action=home" class="flex items-center">
       <h1 class="text-3xl font-bold leading-tight">
       <?="".($GLOBALS['site_info']['Company_name'] ?? 'Chưa có tên') ?>
         
         <br><span class="text-xs text-xl"><?="".($GLOBALS['site_info']['Slogan '] ?? 'Chưa có slogan ') ?></span>
       </h1>
+      </a>
+      
     </div>
 
     <!--  Menu chính -->
