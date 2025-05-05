@@ -6,7 +6,8 @@
   <!-- <title>Home</title> -->
   <title><?php echo $page_title ?? 'Home'; ?></title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />   <!-- Tailwind CSS CDN -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> <!-- Font Awesome CDN -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" /> <!-- Font Awesome CDN -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" /> <!-- Font Awesome CDN -->
   <link href="/MUJI/web_project/assets/css/products.css" rel="stylesheet" />
   <link href="/MUJI/web_project/assets/css/footer.css" rel="stylesheet" />
   <script src="/MUJI/web_project/assets/js/Header.js"></script>
@@ -148,77 +149,27 @@
      </form>
   
     <!-- Đoạn code giỏ hàng trong Header.php -->
-    <div class="position-relative">
-        <a href="index.php?action=cart" class="text-white d-flex align-items-center text-decoration-none">
-            <i class="fas fa-shopping-cart fs-5 me-2"></i>
-            <span class="d-none d-lg-inline">Giỏ hàng</span>
-            <?php
-            // Lấy số lượng sản phẩm trong giỏ hàng
-            $cartCount = 0;
-            if (isset($db)) {
-                require_once __DIR__ . '/../models/Cart.php';
-                $cartModel = new Cart($db);
-                $userId = isset($_SESSION['user']) ? $_SESSION['user']['id'] : null;
-                $sessionId = session_id();
-                $cartCount = $cartModel->countCartItems($userId, $sessionId);
-            }
-            ?>
-            <?php if ($cartCount > 0): ?>
-                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="cart-count">
-                    <?php echo $cartCount; ?>
-                </span>
-            <?php endif; ?>
-        </a>
-    </div>
-    <!-- Giỏ hàng -->
-    <!-- <div class="ml-1">
-        <a href="index.php?action=cart" class="flex items-center text-red-800 font-semibold hover:underline">
-            <img src="/MUJI/web_project/assets/images/shopping-cart.png" class="h-12 w-12" alt="Giỏ hàng"/>
-         </a>
-      </div> -->
-      <!-- Cart -->
-      <!-- <div class="position-relative">
-          <a href="index.php?action=cart" class="text-dark d-flex align-items-center text-decoration-none">
-              <i class="fas fa-shopping-cart fs-5 me-2"></i>
-              <span class="d-none d-lg-inline">Giỏ hàng</span>
+      <div class="relative ml-1 mr-4 pl-4 pr-12">
+          <a href="index.php?action=cart" class="flex items-center text-white font-semibold hover:underline">
+              <img src="/MUJI/web_project/assets/images/shopping-cart.png" class="h-12 w-12" alt="Giỏ hàng"/>
+              <span class="hidden md:inline ml-1 text-black font-bold">Giỏ hàng</span>
               <?php
-              // Get cart count
+              // Lấy số lượng sản phẩm trong giỏ hàng
               $cartCount = 0;
-              if (isset($cartModel)) {
+              if (isset($db)) {
+                  require_once __DIR__ . '/../../models/Cart.php';
+                  $cartModel = new Cart($db);
                   $userId = isset($_SESSION['user']) ? $_SESSION['user']['id'] : null;
-                  $cartCount = $cartModel->countCartItems($userId, session_id());
+                  $sessionId = session_id();
+                  $cartCount = $cartModel->countCartItems($userId, $sessionId);
               }
               ?>
               <?php if ($cartCount > 0): ?>
-                  <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="cart-count">
+                  <span class="absolute -top-2 -right-2 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white bg-blue-600 rounded-full transform scale-100 transition-transform duration-300 hover:scale-110" id="cart-count">
                       <?php echo $cartCount; ?>
-                  </span>
+                  </span> 
               <?php endif; ?>
           </a>
-      </div> -->
-      <!-- Phần đăng nhập/đăng ký trong Header.php -->
-      <div class="flex items-center space-x-2 text-xl pl-6">
-          
-          <?php if (isset($_SESSION['user'])): ?>
-              <div class="dropdown">
-                  <a href="#" class="text-red-800 font-semibold hover:underline dropdown-toggle" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                      <?php echo htmlspecialchars($_SESSION['user']['full_name']); ?>
-                  </a>
-                  <ul class="dropdown-menu" aria-labelledby="userDropdown">
-                      <?php if ($_SESSION['user']['role'] === 'admin'): ?>
-                          <li><a class="dropdown-item" href="index.php?action=admin">Quản trị</a></li>
-                      <?php endif; ?>
-                      <!-- <li><a class="dropdown-item" href="index.php?action=profile">Tài khoản của tôi</a></li> -->
-                      <li><a class="dropdown-item" href="index.php?action=my_orders">Đơn hàng của tôi</a></li>
-                      <li><hr class="dropdown-divider"></li>
-                      <li><a class="dropdown-item" href="index.php?action=logout">Đăng xuất</a></li>
-                  </ul>
-              </div>
-          <?php else: ?>
-              <a href="index.php?action=login" class="text-red-800 font-semibold hover:underline">Đăng nhập</a>
-              <span class="text-red-800">|</span>
-              <a href="index.php?action=register" class="text-red-800 font-semibold hover:underline">Đăng ký</a>
-          <?php endif; ?>
       </div>
   </div>
 </div>
