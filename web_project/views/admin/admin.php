@@ -49,6 +49,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_GET['action'] ?? '') === 'update
     updateSiteValue($conn, 'hotline', $_POST['hotline']);
     updateSiteValue($conn, 'address', $_POST['address']);
     updateSiteValue($conn, 'Company_name', $_POST['Company_name']);
+    updateSiteValue($conn, 'email', $_POST['email']);
+
     updateSiteValue($conn, 'Slogan', $_POST['Slogan']);  // Đã sửa lỗi khoảng trắng trong tên khóa
     
     // MỞ RỘNG: Thêm các trường bổ sung tại đây khi cần thiết
@@ -65,7 +67,9 @@ $GLOBALS['site_info'] = [
     'address' => getSiteValue($conn, 'address'),
     'logo' => getSiteValue($conn, 'logo'),
     'Company_name' => getSiteValue($conn, 'Company_name'),
-    'Slogan' => getSiteValue($conn, 'Slogan')
+    'Slogan' => getSiteValue($conn, 'Slogan'),
+    'email' => getSiteValue($conn, 'email')
+
     // MỞ RỘNG: Thêm các trường thông tin trang web mới tại đây
 ];
 

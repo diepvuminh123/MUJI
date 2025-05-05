@@ -36,7 +36,9 @@ $GLOBALS['site_info'] = [
     'address' => getSiteValue($conn, 'address'),
     'logo' => getSiteValue($conn, 'logo'),
     'Company_name' => getSiteValue($conn, 'Company_name'),
-    'Slogan' => getSiteValue($conn, 'Slogan')
+    'Slogan' => getSiteValue($conn, 'Slogan'),
+    'email' => getSiteValue($conn, 'email')
+    
 ];
 
 // Hiển thị thông báo từ session nếu có
@@ -109,6 +111,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
     updateSiteValue($conn, 'address', $_POST['address']);
     updateSiteValue($conn, 'Company_name', $_POST['Company_name']);
     updateSiteValue($conn, 'Slogan', $_POST['Slogan']);
+    updateSiteValue($conn, 'email', $_POST['email']);
+    
 
     $_SESSION['success_message'] = "Cập nhật thông tin thành công ✅";
     header("Location: admin.php?action=updateSiteInfo");
@@ -188,6 +192,7 @@ document.addEventListener('DOMContentLoaded', function() {
       <p class="fs-3"><strong>Hotline:</strong> <?= htmlspecialchars($GLOBALS['site_info']['hotline']) ?></p>
       <p class="fs-3"><strong>Địa chỉ:</strong> <?= htmlspecialchars($GLOBALS['site_info']['address']) ?></p>
       <p class="fs-3"><strong>Slogan:</strong> <?= htmlspecialchars($GLOBALS['site_info']['Slogan']) ?></p>
+      <p class="fs-3"><strong>email:</strong> <?= htmlspecialchars($GLOBALS['site_info']['email']) ?></p>
     </div>
   </div>
 
@@ -214,6 +219,10 @@ document.addEventListener('DOMContentLoaded', function() {
         <div class="mb-3 fs-4">
           <label class="form-label">Slogan:</label>
           <input type="text" name="Slogan" class="form-control fs-4" value="<?= htmlspecialchars($GLOBALS['site_info']['Slogan']) ?>" required>
+        </div>
+        <div class="mb-3 fs-4">
+          <label class="form-label">Email:</label>
+          <input type="text" name="email" class="form-control fs-4" value="<?= htmlspecialchars($GLOBALS['site_info']['email']) ?>" required>
         </div>
         <button type="submit" class="btn btn-primary btn-lg">Cập nhật</button>
       </form>
