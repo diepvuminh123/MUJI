@@ -153,10 +153,9 @@
      </form>
   
     <!-- Đoạn code giỏ hàng trong Header.php -->
+      <!-- Đoạn code giỏ hàng trong Header.php -->
       <div class="relative ml-1 mr-4 pl-4 pr-12">
           <a href="index.php?action=cart" class="flex items-center text-white font-semibold hover:underline">
-              <img src="/MUJI/web_project/assets/images/shopping-cart.png" class="h-12 w-12" alt="Giỏ hàng"/>
-              <span class="hidden md:inline ml-1 text-black font-bold">Giỏ hàng</span>
               <?php
               // Lấy số lượng sản phẩm trong giỏ hàng
               $cartCount = 0;
@@ -169,10 +168,12 @@
               }
               ?>
               <?php if ($cartCount > 0): ?>
-                  <span class="absolute -top-2 -right-5 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white bg-blue-600 rounded-full transform scale-100 transition-transform duration-300 hover:scale-110" id="cart-count">
+                  <span class="absolute top-0 left-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white bg-blue-600 rounded-full transform scale-100 transition-transform duration-300 hover:scale-110" id="cart-count">
                       <?php echo $cartCount; ?>
                   </span> 
               <?php endif; ?>
+              <img src="/MUJI/web_project/assets/images/shopping-cart.png" class="h-12 w-12" alt="Giỏ hàng"/>
+              <span class="hidden md:inline ml-1 text-black font-bold">Giỏ hàng</span>
           </a>
       </div>
   </div>
