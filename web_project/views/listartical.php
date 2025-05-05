@@ -290,7 +290,7 @@ $category = isset($_GET['category']) ? $conn->real_escape_string($_GET['category
 
 <div class="container">
     <?php if (!$id): ?>
-        <h1 class="page-title"><?= $category ? htmlspecialchars($category) : "Tin tức mới nhất" ?></h1>
+        <h1 class="page-title pt-5" ><?= $category ? htmlspecialchars($category) : "Tin tức mới nhất" ?></h1>
         <div class="category-nav">
             <a href="index.php?action=listartical" class="category-link <?= !$category ? 'active' : '' ?>">Tất cả</a>
             <?php

@@ -169,7 +169,7 @@
               }
               ?>
               <?php if ($cartCount > 0): ?>
-                  <span class="absolute -top-2 -right-2 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white bg-blue-600 rounded-full transform scale-100 transition-transform duration-300 hover:scale-110" id="cart-count">
+                  <span class="absolute -top-2 -right-5 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white bg-blue-600 rounded-full transform scale-100 transition-transform duration-300 hover:scale-110" id="cart-count">
                       <?php echo $cartCount; ?>
                   </span> 
               <?php endif; ?>
