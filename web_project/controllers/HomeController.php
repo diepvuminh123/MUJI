@@ -1,5 +1,8 @@
 <?php
+
 require_once __DIR__ . '/../models/SiteInfoModel.php';
+$GLOBALS['site_info'] = SiteInfoModel::getAll();
+
 require_once __DIR__ . '/../models/Product.php'; 
 
 require_once __DIR__ . '/../models/SliderModel.php'; // Thêm dòng này

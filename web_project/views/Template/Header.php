@@ -94,10 +94,10 @@
     <!--  Menu chính -->
     <ul class="hidden md:flex  font-semibold " style="gap:30px;">
       <li><a href="index.php?action=products" class="hover:underline " style="font-size: 22px;">Danh sách sản phẩm </a></li>
-      <li><a href="#" class="hover:underline " style="font-size: 22px;">Liên Hệ</a></li>
-      <li><a href="#" class="hover:underline " style="font-size: 22px;">Giới Thiệu</a></li>
-      <li><a href="#" class="hover:underline " style="font-size: 22px;">Hỏi Đáp</a></li>
-      <li><a href="#" class="hover:underline " style="font-size: 22px;">Danh sách bài viết</a></li>
+      <li><a href="index.php?action=contact" class="hover:underline " style="font-size: 22px;">Liên Hệ</a></li>
+      <li><a href="index.php?action=about" class="hover:underline " style="font-size: 22px;">Giới Thiệu</a></li>
+      <li><a href="index.php?action=qa" class="hover:underline " style="font-size: 22px;">Hỏi Đáp</a></li>
+      <li><a href="index.php?action=listartical" class="hover:underline " style="font-size: 22px;">Danh sách bài viết</a></li>
 
      
     </ul>

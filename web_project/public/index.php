@@ -6,6 +6,8 @@ if (session_status() == PHP_SESSION_NONE) {
 $action = $_GET['action'] ?? 'home';
 
 require_once __DIR__ . '/../config/config.php';
+require_once __DIR__ . '/../models/SiteInfoModel.php';
+$GLOBALS['site_info'] = SiteInfoModel::getAll();
 
 $db = $GLOBALS['conn'];
 
@@ -23,6 +25,16 @@ switch ($action) {
         require_once '../controllers/HomeController.php';
         (new HomeController())->index();
         break;
+    case 'contact':
+        require_once '../views/contact.php';
+        break;
+    case 'about':
+        require_once '../views/about.php';
+        break;   
+    case 'qa':
+        require_once '../views/qa.php';
+        break;  
+    
 
     case 'admin':
         require_once '../views/admin/admin.php';
