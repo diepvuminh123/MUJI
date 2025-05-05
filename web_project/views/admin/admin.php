@@ -107,9 +107,14 @@ $GLOBALS['site_info'] = [
       <!-- Phần Logo/Tiêu đề -->
       <div class="sidebar-header position-relative">
         <div class="d-flex justify-content-between align-items-center">
-          <div class="logo">
-            <a href="admin.php"><img src="./assets/compiled/svg/logo.svg" alt="Logo"></a>
-          </div>
+        <h1 class="h3 fw-bold lh-sm">
+        <?= $GLOBALS['site_info']['Company_name'] ?? 'Chưa có tên' ?>
+        <br>
+        <span class="fs-5 fw-normal text-muted">
+          <?= $GLOBALS['site_info']['Slogan'] ?? 'Chưa có slogan ' ?>
+        </span>
+      </h1>
+
         </div>
       </div>
       <!-- Menu điều hướng -->
